@@ -1539,27 +1539,27 @@ public class Getter
 					switch(currentSection)
 					{
 						case 1: //fieldTraining
-							log.debug("Starting Field Training List");
+							//log.debug("Starting Field Training List");
 							levelMasterList += "<a id=\"fieldTrainingList\" href=\"javascript:;\"><div class=\"menuButton\">Field Training</div></a>"
 								+ "<ul id=\"theFieldTrainingList\" style=\"display: none;\">\n";
 							break;
 						case 2: //corporal
-							log.debug("Starting Corporal List");
+							//log.debug("Starting Corporal List");
 							levelMasterList += "<a id=\"corporalList\" href=\"javascript:;\"><div class=\"menuButton\">Corporal</div></a>"
 								+ "<ul id=\"theCorporalList\" style=\"display: none;\">\n";
 							break;
 						case 3: //sergeant
-							log.debug("Starting Sergeant List");
+							//log.debug("Starting Sergeant List");
 							levelMasterList += "<a id=\"sergeantList\" href=\"javascript:;\"><div class=\"menuButton\">Sergeant</div></a>"
 								+ "<ul id=\"theSergeantList\" style=\"display: none;\">\n";
 							break;
 						case 4: //major
-							log.debug("Starting Major List");
+							//log.debug("Starting Major List");
 							levelMasterList += "<a id=\"majorList\" href=\"javascript:;\"><div class=\"menuButton\">Major</div></a>"
 								+ "<ul id=\"theMajorList\" style=\"display: none;\">\n";
 							break;
 						case 5: //admiral
-							log.debug("Starting Admiral List");
+							//log.debug("Starting Admiral List");
 							levelMasterList += "<a id=\"admiralList\" href=\"javascript:;\"><div class=\"menuButton\">Admiral</div></a>"
 								+ "<ul id=\"theAdmiralList\" style=\"display: none;\">\n";
 							break;
