@@ -1489,48 +1489,96 @@ public class Getter
 	public static String getTournamentModules (String ApplicationRoot, String userId)
 	{
 		log.debug("*** Getter.getTournamentModules ***");
-		String output = new String();
+		String levelMasterList = new String();
 		Encoder encoder = ESAPI.encoder();
 		Connection conn = Database.getCoreConnection(ApplicationRoot);
 		try
 		{
+			String listEntry = new String();
 			//Get the modules
-			CallableStatement callstmt = conn.prepareCall("call moduleOpenInfo(?)");
+			CallableStatement callstmt = conn.prepareCall("call moduleTournamentOpenInfo(?)");
 			callstmt.setString(1, userId);
-			log.debug("Gathering moduleOpenInfo ResultSet for user " + userId);
-			ResultSet lessons = callstmt.executeQuery();
-			log.debug("Opening Result Set from moduleOpenInfo");
-			int rowNumber = 0; // Used to indetify the first row, as it is slightly different to all other rows for output
-			while(lessons.next())
+			log.debug("Gathering moduleTournamentOpenInfo ResultSet for user " + userId);
+			ResultSet levels = callstmt.executeQuery();
+			log.debug("Opening Result Set from moduleTournamentOpenInfo");
+			int currentSection = 0; // Used to identify the first row, as it is slightly different to all other rows for output
+			while(levels.next())
 			{
+				//Create Row Entry First
 				//log.debug("Adding " + lessons.getString(1));
-				output += "<li>";
+				listEntry = "<li>";
 				//Markers for completion
-				if(lessons.getString(4) != null)
+				if(levels.getString(4) != null)
 				{
-					output += "<img src='css/images/completed.gif'/>";
+					listEntry += "<img src='css/images/completed.gif'/>";
 				}
 				else
 				{
-					output+= "<img src='css/images/uncompleted.gif'/>";
+					listEntry += "<img src='css/images/uncompleted.gif'/>";
 				}
-				//Prepare lesson output
-				output += "<a class='lesson' id='" 
-					+ encoder.encodeForHTMLAttribute(lessons.getString(3))
+				//Prepare entry output
+				listEntry += "<a class='lesson' id='" 
+					+ encoder.encodeForHTMLAttribute(levels.getString(3))
 					+ "' href='javascript:;'>" 
-					+ encoder.encodeForHTML(lessons.getString(1)) 
-					+ "</a>";
-				output += "</li>";
-				rowNumber++;
+					+ encoder.encodeForHTML(levels.getString(1)) 
+					+ "</a>\n";
+				listEntry += "</li>";
+				//What section does this belong in? Current or Next?
+				if (getTounnamentSectionFromRankNumber(levels.getInt(5)) > currentSection)
+				{
+					//This level is not in the same level band as the previous level. So a new Level Band Header is required on the master list before we add the entry.
+					//Do we need to close a previous list?
+					if(currentSection != 0) //If a Section Select hasn't been made before, we don't need to close any previous sections
+					{
+						//We've had a section before, so need to close the previous one before we make this new one
+						levelMasterList += "</ul>\n";
+					}
+					//Update the current section to the one we have just added to the list
+					currentSection = getTounnamentSectionFromRankNumber(levels.getInt(5));
+					//Which to Add?
+					switch(currentSection)
+					{
+						case 1: //fieldTraining
+							log.debug("Starting Field Training List");
+							levelMasterList += "<a id=\"fieldTrainingList\" href=\"javascript:;\"><div class=\"menuButton\">Field Training</div></a>"
+								+ "<ul id=\"theFieldTrainingList\" style=\"display: none;\">\n";
+							break;
+						case 2: //corporal
+							log.debug("Starting Corporal List");
+							levelMasterList += "<a id=\"corporalList\" href=\"javascript:;\"><div class=\"menuButton\">Corporal</div></a>"
+								+ "<ul id=\"theCorporalList\" style=\"display: none;\">\n";
+							break;
+						case 3: //sergeant
+							log.debug("Starting Sergeant List");
+							levelMasterList += "<a id=\"sergeantList\" href=\"javascript:;\"><div class=\"menuButton\">Sergeant</div></a>"
+								+ "<ul id=\"theSergeantList\" style=\"display: none;\">\n";
+							break;
+						case 4: //major
+							log.debug("Starting Major List");
+							levelMasterList += "<a id=\"majorList\" href=\"javascript:;\"><div class=\"menuButton\">Major</div></a>"
+								+ "<ul id=\"theMajorList\" style=\"display: none;\">\n";
+							break;
+						case 5: //admiral
+							log.debug("Starting Admiral List");
+							levelMasterList += "<a id=\"admiralList\" href=\"javascript:;\"><div class=\"menuButton\">Admiral</div></a>"
+								+ "<ul id=\"theAdmiralList\" style=\"display: none;\">\n";
+							break;
+					}
+				}
+				//Now we can add the entry to the level master List and start again
+				levelMasterList += listEntry;
+				//log.debug("Put level in category: " + currentSection);
 			}
 			//If no output has been found, return an error message
-			if(output.isEmpty())
+			if(levelMasterList.isEmpty())
 			{
-				output = "<li><a href='javascript:;'>No modules found</a></li>";
+				levelMasterList = "<ul><li><a href='javascript:;'>No modules found</a></li></ul>";
 			}
 			else
 			{
-				log.debug("Tournaments List returned");
+				//List is complete, but we need to close the last list we made, which deinfetly exists as the levelmasterList is not empty
+				levelMasterList += "</ul>";
+				log.debug("Tournament List returned");
 			}
 		}
 		catch(Exception e)
@@ -1538,7 +1586,28 @@ public class Getter
 			log.error("Tournament List Retrieval: " + e.toString());
 		}
 		Database.closeConnection(conn);
-		return output;
+		return levelMasterList;
+	}
+	
+	private static int fieldTrainingCap = 30;
+	private static int corporalCap = 60;
+	private static int sergeantCap = 90;
+	private static int majorCap = 120;
+	private static int admiralCap = 999; //everything above Major is Admiral
+	private static int getTounnamentSectionFromRankNumber (int rankNumber)
+	{
+		if(rankNumber < fieldTrainingCap)
+			return 1;
+		else if (rankNumber < corporalCap)
+			return 2;
+		else if (rankNumber < sergeantCap)
+			return 3;
+		else if (rankNumber < majorCap)
+			return 4;
+		else if (rankNumber < admiralCap)
+			return 5;
+		else
+			return 5; //Max level is 5.
 	}
 	
 	/**

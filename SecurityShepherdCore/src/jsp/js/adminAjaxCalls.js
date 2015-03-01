@@ -157,6 +157,20 @@ $("#openFloorModuleLink").click(function(){
 	});
 });
 
+$("#tournamentFloorModuleLink").click(function(){
+	$("#submitResult").slideUp("fast", function(){
+		$("#contentDiv").hide("fast", function(){
+			$("#contentDiv").load("admin/moduleManagement/tournamentFloor.jsp", function(response, status, xhr) {
+			  if (status == "error") {
+				var msg = "Sorry but there was an error: ";
+				$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+			  }
+			  $("#contentDiv").show("fast");
+			});
+		});	
+	});
+});
+
 $("#incrementalModulesLink").click(function(){
 	$("#submitResult").slideUp("fast", function(){
 		$("#contentDiv").hide("fast", function(){

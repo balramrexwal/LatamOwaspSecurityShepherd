@@ -122,8 +122,9 @@ if (request.getSession() != null)
 								<li>
 									<a id="moduleManagementList" href="javascript:;">Module Management</a>
 									<ul id="theModuleManagementList" style="display: none;">
-										<li><a id="openFloorModuleLink" href="javascript:;">Open Floor Modules</a></li>
-										<li><a id="incrementalModulesLink" href="javascript:;">CTF Mode</a></li>
+										<li><a id="openFloorModuleLink" href="javascript:;">Open Floor Plan</a></li>
+										<li><a id="tournamentFloorModuleLink" href="javascript:;">Tournament Floor Plan</a></li>
+										<li><a id="incrementalModulesLink" href="javascript:;">CTF Floor Plan</a></li>
 										<li><a id="stopHereLink" href="javascript:;">Enable Module Block</a></li>
 										<li><a id="disableBlockLink" href="javascript:;">Disable Module Block</a></li>
 										<li><a id="setModuleStatusLink" href="javascript:;">Open and Close Modules</a></li>
@@ -186,10 +187,7 @@ if (request.getSession() != null)
 							</div>
 						<% } else {%>
 						<li>
-							<a id="challengeList" href="javascript:;"><div class="menuButton">Challenges</div></a>
-							<ul id="theChallengeList" style="display: none;">
 							<%= Getter.getTournamentModules(ApplicationRoot, (String)ses.getAttribute("userStamp")) %>
-							</ul>
 						</li>
 						<% }
 					} //End of Module List Output %>
@@ -360,6 +358,49 @@ if (request.getSession() != null)
 				$("#solutionDiv").show("fast");
 			});
 		});
+		<% } %>
+		
+		<% if(ModulePlan.tornyFloor){%>
+			$("#fieldTrainingList").click(function () {
+				$("#theFieldTrainingList").toggle("slow");
+				$("#theCorporalList").hide("fast");
+				$("#theSergeantList").hide("fast");
+				$("#theMajorList").hide("fast");
+				$("#theAdmiralList").hide("fast");
+			});  
+			
+			$("#corporalList").click(function () {
+				$("#theCorporalList").toggle("slow");
+				$("#theFieldTrainingList").hide("fast");
+				$("#theSergeantList").hide("fast");
+				$("#theMajorList").hide("fast");
+				$("#theAdmiralList").hide("fast");
+			});  
+			
+			$("#sergeantList").click(function () {
+				$("#theSergeantList").toggle("slow");
+				$("#theFieldTrainingList").hide("fast");
+				$("#theCorporalList").hide("fast");
+				$("#theMajorList").hide("fast");
+				$("#theAdmiralList").hide("fast");
+			});  
+			
+			$("#majorList").click(function () {
+				$("#theMajorList").toggle("slow");
+				$("#theFieldTrainingList").hide("fast");
+				$("#theCorporalList").hide("fast");
+				$("#theSergeantList").hide("fast");
+				$("#theAdmiralList").hide("fast");
+			}); 
+			
+			$("#admiralList").click(function () {
+				$("#theAdmiralList").toggle("slow");
+				$("#theFieldTrainingList").hide("fast");
+				$("#theCorporalList").hide("fast");
+				$("#theSergeantList").hide("fast");
+				$("#theMajorList").hide("fast");
+			}); 
+			
 		<% } %>
 		
 		</script>
