@@ -164,6 +164,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>/tournyFloorModules</servlet-name>
+		<servlet-class>servlets.admin.moduleManagement.SetTournyFloor</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/tournyFloorModules</servlet-name>
+		<url-pattern>/tournyFloorModules</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>/closeEveryModules</servlet-name>
 		<servlet-class>servlets.admin.moduleManagement.CloseAllModules</servlet-class>
 	</servlet>
@@ -242,17 +251,7 @@
 	<servlet-mapping>
 		<servlet-name>/scoreboard</servlet-name>
 		<url-pattern>/scoreboard</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>/setTornyFloorPlan</servlet-name>
-		<servlet-class>servlets.admin.moduleManagement.SetTornyFloorPlan</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/setTornyFloorPlan</servlet-name>
-		<url-pattern>/setTornyFloorPlan</url-pattern>
-	</servlet-mapping>
-	
+	</servlet-mapping>	
 	
 	<servlet>
 		<servlet-name>/enableCheats</servlet-name>

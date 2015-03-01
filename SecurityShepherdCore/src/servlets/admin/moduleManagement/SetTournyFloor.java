@@ -17,7 +17,7 @@ import utils.ShepherdLogManager;
 import utils.Validate;
 
 /**
- * Control class that modifies the server floor plan to a CTF/Incremental state. This is due a name change
+ * Control class that modifies the server floor plan to a Tournament state.
  * <br/><br/>
  * This file is part of the Security Shepherd Project.
  * 
@@ -36,10 +36,10 @@ import utils.Validate;
  * @author Mark Denihan
  *
  */
-public class SetTornyFloorPlan extends HttpServlet 
+public class SetTournyFloor extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	private static org.apache.log4j.Logger log = Logger.getLogger(SetTornyFloorPlan.class);
+	private static org.apache.log4j.Logger log = Logger.getLogger(SetTournyFloor.class);
 	/**
 	 * Called to change the status of the utils.ModulePlan class. Once this has been called by a valid administrator, the utils.ModulePlan will be changed.
 	 * @param csrfToken
@@ -49,7 +49,7 @@ public class SetTornyFloorPlan extends HttpServlet
 	{
 		//Setting IpAddress To Log and taking header for original IP if forwarded from proxy
 		ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"));
-		log.debug("*** servlets.Admin.SetTornyFloorPlan ***");
+		log.debug("*** servlets.Admin.SetTournyFloor ***");
 		PrintWriter out = response.getWriter();  
 		out.print(getServletInfo());
 		HttpSession ses = request.getSession(true);
@@ -57,18 +57,18 @@ public class SetTornyFloorPlan extends HttpServlet
 		{
 			Cookie tokenCookie = Validate.getToken(request.getCookies());
 			Object tokenParmeter = request.getParameter("csrfToken");
-			if(Validate.validateTokens(tokenCookie, tokenParmeter) && ModulePlan.isOpenFloor())
+			if(Validate.validateTokens(tokenCookie, tokenParmeter) )
 			{
-				ModulePlan.setTornyFloor();
+				ModulePlan.setTournyFloor();
 				log.debug("Tournament Mode enabled");
-				out.write("<h2 class='title'>Tournament Mode Enabled</h2>" +
-				"<p>Security Shepherd User is now using the tournament floor plan</p>");
+				out.write("<h2 class='title'>Tournament Floor Plan Enabled</h2>" +
+				"<p>Security Shepherd Users are now using the tournament floor plan</p>");
 			}
 			else
 			{
 				out.write("Error Occurred!");
 			}
 		}
-		log.debug("*** END servlets.Admin.SetTornyFloorPlan ***");
+		log.debug("*** END servlets.Admin.SetTournyFloor ***");
 	}
 }

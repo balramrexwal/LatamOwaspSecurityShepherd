@@ -1111,6 +1111,23 @@ END
 $$
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure moduleTournamentOpenInfo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`moduleTournamentOpenInfo` (IN theUserId VARCHAR(64))
+BEGIN
+(SELECT moduleName, moduleCategory, moduleId, finishTime, incrementalRank, scoreValue FROM modules LEFT JOIN results USING (moduleId) 
+WHERE userId = theUserId AND moduleStatus = 'open') UNION (SELECT moduleName, moduleCategory, moduleId, null, incrementalRank, scoreValue FROM modules WHERE moduleId NOT IN (SELECT moduleId FROM modules JOIN results USING (moduleId) WHERE userId = theUserId AND moduleStatus = 'open') AND moduleStatus = 'open') ORDER BY incrementalRank, scoreValue, moduleName;
+END
+
+$$
+
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- procedure moduleSetStatus
 -- -----------------------------------------------------
