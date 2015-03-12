@@ -35,6 +35,9 @@ CREATE  TABLE IF NOT EXISTS `core`.`users` (
   `userAddress` VARCHAR(128) NULL ,
   `tempPassword` TINYINT(1)  NULL DEFAULT FALSE ,
   `userScore` INT NOT NULL DEFAULT 0 ,
+  `goldMedalCount` INT NOT NULL DEFAULT 0 ,
+  `silverMedalCount` INT NOT NULL DEFAULT 0 ,
+  `bronzeMedalCount` INT NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`userId`) ,
   INDEX `classId` (`classId` ASC) ,
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) ,
@@ -61,6 +64,9 @@ CREATE  TABLE IF NOT EXISTS `core`.`modules` (
   `scoreValue` INT NOT NULL DEFAULT 50 ,
   `scoreBonus` INT NOT NULL DEFAULT 5 ,
   `hardcodedKey` TINYINT(1) NOT NULL DEFAULT TRUE,
+  `goldMedalAvailable` TINYINT(1) NOT NULL DEFAULT TRUE,
+  `silverMedalAvailable` TINYINT(1) NOT NULL DEFAULT TRUE,
+  `bronzeMedalAvailable` TINYINT(1) NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`moduleId`) )
 ENGINE = InnoDB;
 
@@ -620,6 +626,7 @@ END
 $$
 
 DELIMITER ;
+
 -- -----------------------------------------------------
 -- procedure userUpdateResult
 -- -----------------------------------------------------
@@ -631,6 +638,10 @@ BEGIN
 DECLARE theDate TIMESTAMP;
 DECLARE theBonus INT;
 DECLARE totalScore INT;
+DECLARE medalInfo INT; -- Used to find out if there is a medal available
+DECLARE goldMedalInfo INT;
+DECLARE silverMedalInfo INT;
+DECLARE bronzeMedalInfo INT;
 COMMIT;
 SELECT NOW() FROM DUAL
     INTO theDate;
@@ -646,6 +657,36 @@ IF (theBonus > 0) THEN
         scoreBonus = scoreBonus - 1
         WHERE moduleId = theModuleId;
     COMMIT;
+END IF;
+
+-- Medal Available?
+SELECT count(moduleId) FROM modules
+	WHERE moduleId = theModuleId
+	AND (goldMedalAvailable = TRUE OR silverMedalAvailable = TRUE OR bronzeMedalAvailable = TRUE)
+	INTO medalInfo;
+COMMIT;
+
+IF (medalInfo > 0) THEN
+	SELECT count(moduleId) FROM modules WHERE moduleId = theModuleId AND goldMedalAvailable = TRUE INTO goldMedalInfo;
+	IF (goldMedalInfo > 0) THEN
+		UPDATE users SET goldMedalCount = goldMedalCount + 1 WHERE userId = theUserId; 
+		UPDATE modules SET goldMedalAvailable = FALSE WHERE moduleId = theModuleId;
+		COMMIT;
+	ELSE	
+		SELECT count(moduleId) FROM modules WHERE moduleId = theModuleId AND silverMedalAvailable = TRUE INTO silverMedalInfo;
+		IF (silverMedalInfo > 0) THEN
+			UPDATE users SET silverMedalCount = silverMedalCount + 1 WHERE userId = theUserId;
+			UPDATE modules SET silverMedalAvailable = FALSE WHERE moduleId = theModuleId;
+			COMMIT;
+		ELSE
+			SELECT count(moduleId) FROM modules WHERE moduleId = theModuleId AND bronzeMedalAvailable = TRUE INTO bronzeMedalInfo;
+			IF (bronzeMedalInfo > 0) THEN
+				UPDATE users SET bronzeMedalCount = bronzeMedalCount + 1 WHERE userId = theUserId;
+				UPDATE modules SET bronzeMedalAvailable = FALSE WHERE moduleId = theModuleId;
+				COMMIT;
+			END IF;
+		END IF;
+	END IF;
 END IF;
 
 -- Get the Score value for the level
@@ -680,6 +721,7 @@ SELECT moduleName FROM modules
 END $$
 
 DELIMITER ;
+
 -- -----------------------------------------------------
 -- procedure moduleGetHash
 -- -----------------------------------------------------
