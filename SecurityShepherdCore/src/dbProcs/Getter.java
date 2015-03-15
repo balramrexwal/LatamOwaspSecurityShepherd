@@ -810,6 +810,20 @@ public class Getter
 							tieBreaker = 0;
 						}
 					}
+					int goldMedals = resultSet.getInt(4);
+					int silverMedals = resultSet.getInt(5);
+					int bronzeMedals = resultSet.getInt(6);
+					String displayMedal = new String("display: inline;");
+					String goldDisplayStyle = new String("display: none;");
+					String silverDisplayStyle = new String("display: none;");
+					String bronzeDisplayStyle = new String("display: none;");
+					if (goldMedals > 0)
+						goldDisplayStyle = displayMedal;
+					if (silverMedals > 0)
+						silverDisplayStyle = displayMedal;
+					if (bronzeMedals > 0)
+						bronzeDisplayStyle = displayMedal;
+					
 					int barScale = (int)((score*100)/baseBarScale); //bar scale is the percentage the bar should be of the row's context (Highest Possible is depends on scale set in maxBarScale. eg: maxBarScale = 1.1 would mean the max scale would be 91% for a single row)
 					jsonInner.put("id", new String(encoder.encodeForHTML(resultSet.getString(1)))); //User Id
 					jsonInner.put("username", new String(encoder.encodeForHTML(resultSet.getString(2)))); //User Name
@@ -818,6 +832,12 @@ public class Getter
 					jsonInner.put("scale", barScale); //Scale of score bar
 					jsonInner.put("place", place); //Place on board
 					jsonInner.put("order", (place+tieBreaker)); //Order on board
+					jsonInner.put("goldMedalCount", new Integer(goldMedals));
+					jsonInner.put("goldDisplay", goldDisplayStyle);
+					jsonInner.put("silverMedalCount", new Integer(silverMedals));
+					jsonInner.put("silverDisplay", silverDisplayStyle);
+					jsonInner.put("bronzeMedalCount", new Integer(bronzeMedals));
+					jsonInner.put("bronzeDisplay", bronzeDisplayStyle);
 					//log.debug("Adding: " + jsonInner.toString());
 					json.add(jsonInner);
 				}

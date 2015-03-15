@@ -1055,9 +1055,9 @@ USE `core`$$
 CREATE PROCEDURE `core`.`classScoreboard` (IN theClassId VARCHAR(64))
 BEGIN
     COMMIT;
-SELECT userId, userName, userScore FROM users 
+SELECT userId, userName, userScore, goldMedalCount, silverMedalCount, bronzeMedalCount FROM users 
 	WHERE classId = theClassId AND userRole = 'player' AND userScore > 0
-	ORDER BY userScore DESC, userId ASC;
+	ORDER BY userScore DESC, goldMedalCount DESC, silverMedalCount DESC, bronzeMedalCount DESC, userId ASC;
 END
 
 $$
@@ -1073,9 +1073,9 @@ USE `core`$$
 CREATE PROCEDURE `core`.`totalScoreboard` ()
 BEGIN
     COMMIT;
-SELECT userId, userName, userScore FROM users 
+SELECT userId, userName, userScore, goldMedalCount, silverMedalCount, bronzeMedalCount FROM users 
 	WHERE userRole = 'player' AND userScore > 0
-	ORDER BY userScore DESC, userId ASC;
+	ORDER BY userScore DESC, goldMedalCount DESC, silverMedalCount DESC, bronzeMedalCount DESC, userId ASC;
 END
 
 $$
