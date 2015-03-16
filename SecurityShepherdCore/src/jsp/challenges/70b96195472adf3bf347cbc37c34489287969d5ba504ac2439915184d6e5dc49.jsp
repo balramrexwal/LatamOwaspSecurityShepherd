@@ -77,7 +77,16 @@ if (request.getSession() != null)
 				Where exampleId is the ID of the user who's CSRF counter is been incremented. Your ID is <a><%= userId %></a>
 				<br/>
 				<br/>
-				You can use the CSRF forum below to post a message with HTML.				
+				You can use the CSRF forum below to post a message with HTML.
+				<% 
+				String moduleId = Getter.getModuleIdFromHash(ApplicationRoot, levelHash);	
+				if (Getter.isCsrfLevelComplete(ApplicationRoot, moduleId, userId)) 
+				{ %>
+					<h2 class='title'>This CSRF Challenge has been Completed</h2>
+					<p>
+					Congratulations, you have completed this CSRF challenge by successfully carrying out a CSRF attack on another user for this level's target. The result key is 
+					<b><a><%=	encoder.encodeForHTML(Hash.generateUserSolution(Getter.getModuleResult(ApplicationRoot, moduleId), (String)ses.getAttribute("userName"))) %></a></b><br/><br/>
+				<% } %>			
 				<form id="leForm" action="javascript:;">
 					<table>
 					<tr><td>

@@ -110,7 +110,7 @@ public class SolutionSubmit extends HttpServlet
 							storedResult += Hash.getCurrentSalt(); //Add server solution salt to base key before compare with decrypted key
 							validKey = storedResult.compareTo(decryptedKey) == 0;
 							log.debug("Decrypted Submitted Key: " + decryptedKey);
-							log.debug("Stored Expected Key: " + storedResult);
+							log.debug("Stored Expected Key    : " + storedResult);
 							
 						}
 						if(validKey)

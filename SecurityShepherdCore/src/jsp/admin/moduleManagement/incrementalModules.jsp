@@ -52,7 +52,7 @@ String ApplicationRoot = getServletContext().getRealPath("");
 		<h1 class="title">CTF Mode</h1>
 		<div class="entry">
 			<form id="theForm" action="javascript:;">
-				<% if (ModulePlan.isOpenFloor()) {%>
+				<% if (!ModulePlan.incrementalFloor) {%>
 					<p>If you enable the CTF floor plan, players will have to complete lessons to unlock links to the next module.</p>
 					<div id="badData"></div>
 					<input type="hidden" id="csrfToken" value="<%= csrfToken %>"/>
