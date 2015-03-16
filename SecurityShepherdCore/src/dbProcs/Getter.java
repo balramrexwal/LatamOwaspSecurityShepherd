@@ -135,21 +135,7 @@ public class Getter
 		catch (SQLException e) 
 		{
 			log.error("Login Failure: " + e.toString());
-			if(userFound)
-			{
-				try
-				{
-					CallableStatement callstmt = conn.prepareCall("call userLock(?)");
-					log.debug("Running account lock function on user '" + userName + "'");
-					callstmt.setString(1, userName);
-					callstmt.execute();
-					log.debug("userLock Executed");
-				}
-				catch (SQLException e1)
-				{
-					log.fatal("Could not run userLock on user: " + e1.toString());
-				}
-			}
+			//Lagging Response
 		}
 		Database.closeConnection(conn);
 		log.debug("$$$ End authUser $$$");
