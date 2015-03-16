@@ -41,6 +41,7 @@ public class OpenOrCloseByCategory extends HttpServlet
 		HttpSession ses = request.getSession(true);
 		if(Validate.validateAdminSession(ses))
 		{
+			ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), ses.getAttribute("userName").toString());
 			Cookie tokenCookie = Validate.getToken(request.getCookies());
 			Object tokenParmeter = request.getParameter("csrfToken");
 			if(Validate.validateTokens(tokenCookie, tokenParmeter))

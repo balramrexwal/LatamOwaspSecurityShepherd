@@ -33,7 +33,7 @@ try
 }
 catch(Exception e)
 {
-	ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Parameter Decription Fail: " + parameter);
+	ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Parameter Description Fail: " + parameter);
 	parameter = "";
 }
 if (request.getSession() != null)

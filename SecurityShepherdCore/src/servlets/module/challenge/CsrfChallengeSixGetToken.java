@@ -66,6 +66,7 @@ public class CsrfChallengeSixGetToken extends HttpServlet
 			HttpSession ses = request.getSession(true);
 			if(Validate.validateSession(ses))
 			{
+				ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), ses.getAttribute("userName").toString());
 				log.debug(levelName + " servlet accessed by: " + ses.getAttribute("userName").toString());
 				String htmlOutput = new String("Your csrf Token for this Challenge is: ");
 				String userId = request.getParameter("userId").toString();

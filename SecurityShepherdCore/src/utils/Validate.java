@@ -216,7 +216,7 @@ public class Validate
 					try 
 					{
 						userName = (String) ses.getAttribute("userName");
-						log.debug("Session holder is " + userName);
+						//log.debug("Session holder is " + userName);
 						String role = (String) ses.getAttribute("userRole");
 						result = (role.compareTo("admin") == 0);
 						if(!result)
@@ -327,7 +327,7 @@ public class Validate
 				{
 					try 
 					{
-						log.debug("Session holder is "+ses.getAttribute("userName").toString());
+						//log.debug("Session holder is "+ses.getAttribute("userName").toString());
 						String role = (String) ses.getAttribute("userRole");
 						result = (role.compareTo("player") == 0 || role.compareTo("admin") == 0);
 						if(!result)
