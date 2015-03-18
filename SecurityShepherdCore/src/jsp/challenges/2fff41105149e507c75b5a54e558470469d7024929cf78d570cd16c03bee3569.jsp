@@ -19,7 +19,7 @@
  * 
  * @author Mark Denihan
  */
-String levelName = "Cross Site Request Forgery Challenge 5";
+String levelName = "Cross Site Request Forgery Challenge 6";
 String levelHash = "2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569";
 
 ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " Accessed");
@@ -57,18 +57,18 @@ if (request.getSession() != null)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Security Shepherd - Cross Site Request Forgery Challenge Five</title>
+	<title>Security Shepherd - <%= levelName %></title>
 	<link href="../css/lessonCss/theCss.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 	<script type="text/javascript" src="../js/jquery.js"></script>
 		<div id="contentDiv">
-			<h2 class="title">Cross Site Request Forgery Challenge Five</h2>
+			<h2 class="title"><%= levelName %></h2>
 			<p> 
 				To complete this challenge, you must get your CSRF counter above 0. The request to increment your counter is as follows
 				<br/>
 				<br/>
-				<a> POST /user/csrfchallengefive/plusplus</a>
+				<a> POST /user/csrfchallengesix/plusplus</a>
 				<br/>
 				With the following parameters; <a>userId = exampleId</a> and <a>csrf = yourCsrfToken</a>
 				<br/>

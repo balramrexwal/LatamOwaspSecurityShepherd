@@ -24,7 +24,7 @@ import dbProcs.Getter;
 import dbProcs.Setter;
 
 /**
- * Cross Site Request Forgery Challenge Six - Does not return result Key
+ * Cross Site Request Forgery Challenge Seven - Does not return result Key
  * <br/><br/>
  * This file is part of the Security Shepherd Project.
  * 
@@ -43,12 +43,12 @@ import dbProcs.Setter;
  * @author Mark Denihan
  *
  */
-public class CsrfChallengeSixGetToken extends HttpServlet
+public class CsrfChallengeSevenGetToken extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static org.apache.log4j.Logger log = Logger.getLogger(CsrfChallengeSixGetToken.class);
+	private static org.apache.log4j.Logger log = Logger.getLogger(CsrfChallengeSevenGetToken.class);
 	private static final String levelHash = "7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3";
-	private static String levelName = "CSRF Challenge 6 Get Token";
+	private static String levelName = "CSRF Challenge 7 Get Token";
 	/**
 	 * Allows users to retrieve their CSRF token for the CSRF Challenge 6 module
 	 * @param myMessage To Be stored as the users message for this module
@@ -58,7 +58,7 @@ public class CsrfChallengeSixGetToken extends HttpServlet
 	{
 		//Setting IpAddress To Log and taking header for original IP if forwarded from proxy
 		ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"));
-		log.debug("Cross-SiteForegery Challenge Get Token Six Servlet");
+		log.debug(levelName + " Servlet");
 		PrintWriter out = response.getWriter();  
 		out.print(getServletInfo());
 		try
@@ -71,13 +71,13 @@ public class CsrfChallengeSixGetToken extends HttpServlet
 				String htmlOutput = new String("Your csrf Token for this Challenge is: ");
 				String userId = request.getParameter("userId").toString();
 				Encoder encoder = ESAPI.encoder();
-				Connection conn = Database.getChallengeConnection(getServletContext().getRealPath(""), "csrfChallengeSix");
+				Connection conn = Database.getChallengeConnection(getServletContext().getRealPath(""), "csrfChallengeEnumerateTokens");
 				try
 				{
-					log.debug("Preparing setCsrfChallengeSixToken call");
-					PreparedStatement callstmnt = conn.prepareStatement("SELECT csrfTokenscol FROM csrfchallengesix.csrfTokens WHERE userId LIKE ?");
+					log.debug("Preparing setCsrfChallengeSevenToken call");
+					PreparedStatement callstmnt = conn.prepareStatement("SELECT csrfTokenscol FROM csrfChallengeEnumTokens.csrfTokens WHERE userId LIKE ?");
 					callstmnt.setString(1, userId);
-					log.debug("Executing setCsrfChallengeSixTokenQuery");
+					log.debug("Executing setCsrfChallengeSevenTokenQuery");
 					ResultSet rs = callstmnt.executeQuery();
 					int i = 0;
 					while(rs.next())

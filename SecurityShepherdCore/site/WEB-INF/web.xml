@@ -598,29 +598,11 @@
 	
 	<servlet>
 		<servlet-name>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeFour</servlet-class>
+		<servlet-class>servlets.module.challenge.CsrfChallengeFive</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</servlet-name>
 		<url-pattern>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeTargetFour</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
-		<url-pattern>/user/csrfchallengefour/plusplus</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeFive</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
-		<url-pattern>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -633,12 +615,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
 		<servlet-class>servlets.module.challenge.CsrfChallengeSix</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
-		<url-pattern>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</url-pattern>
+		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
+		<url-pattern>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -651,12 +633,48 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>/user/csrfchallengesix/getToken</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeSixGetToken</servlet-class>
+		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeSeven</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>/user/csrfchallengesix/getToken</servlet-name>
-		<url-pattern>/user/csrfchallengesix/getToken</url-pattern>
+		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<url-pattern>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengeseven/plusplus</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeTargetSeven</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengeseven/plusplus</servlet-name>
+		<url-pattern>/user/csrfchallengeseven/plusplus</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeFour</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</servlet-name>
+		<url-pattern>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeTargetFour</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
+		<url-pattern>/user/csrfchallengefour/plusplus</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengeseven/getToken</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeSevenGetToken</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengeseven/getToken</servlet-name>
+		<url-pattern>/user/csrfchallengeseven/getToken</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

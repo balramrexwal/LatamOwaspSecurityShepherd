@@ -18,7 +18,7 @@ import dbProcs.Getter;
 import dbProcs.Setter;
 
 /**
- * Cross Site Request Forgery Challenge Four - Does not return result Key
+ * Cross Site Request Forgery Challenge Seven - Does not return result Key
  * <br/><br/>
  * This file is part of the Security Shepherd Project.
  * 
@@ -37,15 +37,15 @@ import dbProcs.Setter;
  * @author Mark Denihan
  *
  */
-public class CsrfChallengeFour extends HttpServlet
+public class CsrfChallengeSeven extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static org.apache.log4j.Logger log = Logger.getLogger(CsrfChallengeFour.class);
-	private static final String levelHash = "84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5";
-	private static String levelName = "CSRF Challenge 4";
+	private static org.apache.log4j.Logger log = Logger.getLogger(CsrfChallengeSeven.class);
+	private static final String levelHash = "7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3";
+	private static String levelName = "CSRF Challenge 7";
 	/**
 	 * Allows users to set their CSRF attack string to complete this module. They should be using this to force users to visit their own pages that
-	 * forces the victim to submit a post request to the CSRFChallengeTargetFour
+	 * forces the victim to submit a post request to the CSRFChallengeTargetSeven
 	 * @param myMessage To Be stored as the users message for this module
 	 */
 	public void doPost (HttpServletRequest request, HttpServletResponse response) 
@@ -68,7 +68,7 @@ public class CsrfChallengeFour extends HttpServlet
 				if(Validate.validateTokens(tokenCookie, tokenParmeter))
 				{
 					String myMessage = request.getParameter("myMessage");
-					log.debug("Message Submitted - " + myMessage);
+					log.debug("User Submitted - " + myMessage);
 					myMessage = Validate.makeValidUrl(myMessage);
 					
 					log.debug("Updating User's Stored Message");

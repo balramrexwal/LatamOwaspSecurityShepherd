@@ -675,26 +675,58 @@ INSERT INTO `SqlChalSix`.`users` (`idusers`, `userName`, `userPin`, `userQuestio
 
 COMMIT;
 
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- csrfChallengeEnumTokens Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `csrfChallengeSix` ;
-CREATE SCHEMA IF NOT EXISTS `csrfChallengeSix` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `csrfChallengeSix` ;
+DROP SCHEMA IF EXISTS `csrfChallengeEnumTokens` ;
+CREATE SCHEMA IF NOT EXISTS `csrfChallengeEnumTokens` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `csrfChallengeEnumTokens` ;
 
 -- -----------------------------------------------------
--- Table `csrfChallengeSix`.`csrfTokens`
+-- Table `csrfChallengeEnumTokens`.`csrfTokens`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `csrfChallengeSix`.`csrfTokens` (
+CREATE TABLE IF NOT EXISTS `csrfChallengeEnumTokens`.`csrfTokens` (
   `userId` VARCHAR(64) NOT NULL,
   `csrfTokenscol` VARCHAR(256) NULL,
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB;
 
--- ======================================================
--- BrokenAuthAndSessMangChalFive
--- ======================================================
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- csrfChallengeFour Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS `csrfChallengeFour` ;
+CREATE SCHEMA IF NOT EXISTS `csrfChallengeFour` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `csrfChallengeFour` ;
+
+-- -----------------------------------------------------
+-- Table `csrfChallengeFour`.`csrfTokens`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `csrfChallengeFour`.`csrfTokens` (
+  `userId` VARCHAR(64) NOT NULL,
+  `csrfTokenscol` VARCHAR(256) NULL,
+  PRIMARY KEY (`userId`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- BrokenAuthAndSessMangChalFive Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
 DROP SCHEMA IF EXISTS `BrokenAuthAndSessMangChalFive` ;
 CREATE SCHEMA IF NOT EXISTS `BrokenAuthAndSessMangChalFive` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `BrokenAuthAndSessMangChalFive`;
@@ -758,6 +790,11 @@ INSERT INTO `BrokenAuthAndSessMangChalFive`.`users` (`userId`, `userName`, `user
 
 COMMIT;
 
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Module Schema Users
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -830,14 +867,20 @@ DROP USER 'secureDood'@'localhost';
 CREATE USER  'secureDood'@'localhost' IDENTIFIED BY 'iCantEv3n';
 GRANT SELECT ON `SqlChalFourSuperSecure`.`users` TO 'secureDood'@'localhost';
 
-DROP USER 'csrfChalSixer'@'localhost';
-CREATE USER  'csrfChalSixer'@'localhost' IDENTIFIED BY 'c4n1bUplZ';
-GRANT SELECT ON `csrfChallengeSix`.`csrfTokens` TO 'csrfChalSixer'@'localhost';
-GRANT INSERT ON `csrfChallengeSix`.`csrfTokens` TO 'csrfChalSixer'@'localhost';
-GRANT UPDATE ON `csrfChallengeSix`.`csrfTokens` TO 'csrfChalSixer'@'localhost';
+DROP USER 'csrfChalEnuer'@'localhost';
+CREATE USER  'csrfChalEnuer'@'localhost' IDENTIFIED BY 'c4n1bUplZ';
+GRANT SELECT ON `csrfChallengeEnumTokens`.`csrfTokens` TO 'csrfChalEnuer'@'localhost';
+GRANT INSERT ON `csrfChallengeEnumTokens`.`csrfTokens` TO 'csrfChalEnuer'@'localhost';
+GRANT UPDATE ON `csrfChallengeEnumTokens`.`csrfTokens` TO 'csrfChalEnuer'@'localhost';
 
 DROP USER  'l3tsg0cra'@'localhost';
 CREATE USER 'l3tsg0cra'@'localhost' IDENTIFIED BY '83ururMa';
 GRANT SELECT ON `BrokenAuthAndSessMangChalFive`.`users` TO 'l3tsg0cra'@'localhost';
 GRANT UPDATE ON `BrokenAuthAndSessMangChalFive`.`users` TO 'l3tsg0cra'@'localhost';
+
+DROP USER 'csrfChalFour'@'localhost';
+CREATE USER  'csrfChalFour'@'localhost' IDENTIFIED BY 'R1n13U2pv';
+GRANT SELECT ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
+GRANT INSERT ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
+GRANT UPDATE ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
 

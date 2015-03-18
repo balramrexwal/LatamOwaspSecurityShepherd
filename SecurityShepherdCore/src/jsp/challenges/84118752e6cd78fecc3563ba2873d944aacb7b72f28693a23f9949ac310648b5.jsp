@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=iso-8859-1" language="java" import="java.sql.*,java.io.*,java.net.*,org.owasp.esapi.ESAPI, org.owasp.esapi.Encoder, dbProcs.*, utils.*" errorPage="" %>
 
 <%
-	// Cross Site Request Forgery Challenge 7
+	// Cross Site Request Forgery Challenge 4
 
 /**
  * This file is part of the Security Shepherd Project.
@@ -21,8 +21,8 @@
  * 
  * @author Mark Denihan
  */
-String levelName = "CSRF Challenge 7";
-String levelHash = "7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3";
+String levelName = "CSRF Challenge 4";
+String levelHash = "84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5";
 ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " Accessed");
 if (request.getSession() != null)
 {
@@ -54,11 +54,9 @@ if (request.getSession() != null)
 		}
 		String userId = encoder.encodeForHTML(ses.getAttribute("userStamp").toString());
 		
-		//Set CSRF Challenge 7 CsrfToken
-		String csrfChal7Token = Hash.randomString().trim();
-		ses.setAttribute("csrfChallengeSevenNonce", csrfChal7Token);
-		Setter.setCsrfChallengeSevenCsrfToken(userId, csrfChal7Token, ApplicationRoot);
-		String getYourTokenUrl = encoder.encodeForHTMLAttribute("../user/csrfchallengeseven/getToken?userId=" + userId);
+		//Set CSRF Challenge 4 CsrfToken
+		String csrfChal4Token = Setter.setCsrfChallengeFourCsrfToken(userId, Hash.randomString().trim(), ApplicationRoot);
+		ses.setAttribute("csrfChallengeFourNonce", csrfChal4Token);
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -75,13 +73,13 @@ if (request.getSession() != null)
 				To complete this challenge, you must get your CSRF counter above 0. The request to increment your counter is as follows
 				<br/>
 				<br/>
-				<a> POST /user/csrfchallengeseven/plusplus</a>
+				<a> POST /user/csrfchallengefour/plusplus</a>
 				<br/>
 				With the following parameters; <a>userId = exampleId</a> and <a>csrf = yourCsrfToken</a>
 				<br/>
 				<br/>
 				Where exampleId is the ID of the user who's CSRF counter is been incremented. 
-				Your ID is <%= userId %> and you can retrieve your CSRF token <a href="<%= getYourTokenUrl %>">here</a>
+				Your ID is <%= userId %> and your CSRF token is <a><%= csrfChal4Token %></a>
 				<br/>
 				<br/>
 				You can use the CSRF forum below to post web site
@@ -92,7 +90,7 @@ if (request.getSession() != null)
 					<h2 class='title'>This CSRF Challenge has been Completed</h2>
 					<p>
 					Congratulations, you have completed this CSRF challenge by successfully carrying out a CSRF attack on another user for this level's target. The result key is 
-					<b><a><%=	encoder.encodeForHTML(Hash.generateUserSolution(Getter.getModuleResult(ApplicationRoot, moduleId), (String)ses.getAttribute("userName"))) %></a></b><br/><br/>
+					<b><a><%= encoder.encodeForHTML(Hash.generateUserSolution(Getter.getModuleResult(ApplicationRoot, moduleId), (String)ses.getAttribute("userName"))) %></a></b><br/><br/>
 				<% } %>			
 				<form id="leForm" action="javascript:;">
 					<table>
