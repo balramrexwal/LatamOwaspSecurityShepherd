@@ -289,7 +289,8 @@ public class Validate
 			result = (String) input;
 			if(result.length() > maxLength)
 			{
-				log.debug("Parameter Too Long");
+				log.debug("Parameter Too Long: " + result.length() + " characters");
+				log.debug("Parmaeter Was: " + result);
 				result = new String();
 			}
 		}

@@ -792,6 +792,56 @@ COMMIT;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
+-- Session Management Challenge Six Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP SCHEMA IF EXISTS `BrokenAuthAndSessMangChalSix` ;
+CREATE SCHEMA IF NOT EXISTS `BrokenAuthAndSessMangChalSix` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `BrokenAuthAndSessMangChalSix` ;
+
+-- -----------------------------------------------------
+-- Table `BrokenAuthAndSessMangChalSix`.`users`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `BrokenAuthAndSessMangChalSix`.`users` (
+  `userId` INT NOT NULL ,
+  `userName` VARCHAR(32) NOT NULL ,
+  `userPassword` VARCHAR(128) NOT NULL ,
+  `userAddress` VARCHAR(128) NOT NULL ,
+  `secretQuestion` VARCHAR(256) NOT NULL ,
+  `secretAnswer` VARCHAR(128) NOT NULL, 
+  PRIMARY KEY (`userId`) )
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `BrokenAuthAndSessMangChalSix`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `BrokenAuthAndSessMangChalSix`;
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (1224, 'manager', 		'!148972hsfalkjlkfi381', 'zoidberg23@shepherd.com',	'What is the first name of the person you first kissed?', 'Lena Andrysiak');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (1225, 'sean',	 		'!148972hsfalkjlkfi381', 'zoidberg24@shepherd.com',	'What is the first name of the person you first kissed?', 'Ronit Tornincasa');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (3214, 'administrator', 	'!148972hsfalkjlkfi381', 'buzzthebald@shepherd.com','What is the last name of the teacher who gave you your first failing grade?', 'Aran Keegan');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (3212, 'root', 			'!148972hsfalkjlkfi381', 'elitehacker@shepherd.com','What is the name of the place your wedding reception was held?', 'Deerburn Hotel');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6344, 'superuser', 		'!148972hsfalkjlkfi381', 'superman@security.com',	'Who was the first person to beat you up when you were 8 years old?', 'Lileas Lockwood');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (4524, 'privileged', 		'1489!72hsfalkjlkfi381', 'spoiltbrat@security.com',	'What was the name of the person who stole your TV the second time?', 'Olwen Sordi');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6343, 'mark', 			'148!972hsfalkjlkfi381', 'superman2@security.com',	'Who is your favourite Barista?', 'Buzz Fendall');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6342, 'markdenihan', 	'148!972hsfalkjlkfi381', 'superman3@security.com',	'Who is your most favourite person you have not met?', 'Etna Filippi');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6341, 'seanduggan', 		'148972!hsfalkjlkfi381', 'superman4@security.com',	'Who is your most favourite person you have not met?', 'Emily Fabian');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6551, 'rootuser', 		'14897!2hsfalkjlkfi381', 'superman6@security.com',	'Who is your most favourite person you have not met?', 'Leola Naggia');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6552, 'adminuser', 		'1489!72hsfalkjlkfi381', 'superman7@security.com',	'Who is your most favourite person you have not met?', 'Gladys Gabrielli');
+INSERT INTO `BrokenAuthAndSessMangChalSix`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6559, 'shepherd', 		'148972hsfalk!jlkfi381', 'superman8@security.com',	'Who is your most favourite person you have not met?', 'Morag Bristol');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Module Schema Users
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -883,4 +933,8 @@ CREATE USER  'csrfChalFour'@'localhost' IDENTIFIED BY 'R1n13U2pv';
 GRANT SELECT ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
 GRANT INSERT ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
 GRANT UPDATE ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
+
+DROP USER  'randomMoFoName'@'localhost';
+CREATE USER 'randomMoFoName'@'localhost' IDENTIFIED BY 'c2zXlq_ZoT';
+GRANT SELECT ON `BrokenAuthAndSessMangChalSix`.`users` TO 'randomMoFoName'@'localhost';
 

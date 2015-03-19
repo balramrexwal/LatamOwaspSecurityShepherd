@@ -939,4 +939,22 @@
 		<url-pattern>/challenges/7aed58f3a00087d56c844ed9474c671f8999680556c127a19ee79fa5d7a132e1ChangePass</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement6</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</servlet-name>
+		<url-pattern>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement6SecretQuestion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</servlet-name>
+		<url-pattern>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
