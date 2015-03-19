@@ -842,6 +842,56 @@ COMMIT;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
+-- Session Management Challenge Seven Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP SCHEMA IF EXISTS `BrokenAuthAndSessMangChalSeven` ;
+CREATE SCHEMA IF NOT EXISTS `BrokenAuthAndSessMangChalSeven` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `BrokenAuthAndSessMangChalSeven` ;
+
+-- -----------------------------------------------------
+-- Table `BrokenAuthAndSessMangChalSeven`.`users`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `BrokenAuthAndSessMangChalSeven`.`users` (
+  `userId` INT NOT NULL ,
+  `userName` VARCHAR(32) NOT NULL ,
+  `userPassword` VARCHAR(128) NOT NULL ,
+  `userAddress` VARCHAR(128) NOT NULL ,
+  `secretQuestion` VARCHAR(256) NOT NULL ,
+  `secretAnswer` VARCHAR(128) NOT NULL, 
+  PRIMARY KEY (`userId`) )
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `BrokenAuthAndSessMangChalSeven`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `BrokenAuthAndSessMangChalSeven`;
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (1224, 'manager', 		'!148972hsfalkjlkfi381', 'zoidberg23@shepherd.com',		'What is your favourite flower?', 'Jade Vine');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (1225, 'sean',	 		'!148972hsfalkjlkfi381', 'zoidberg24@shepherd.com',		'What is your favourite flower?', 'Corpse Flower');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (3214, 'administrator', 	'!148972hsfalkjlkfi381', 'buzzthebald@shepherd.com','What is your favourite flower?', 'Gibraltar Campion');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (3212, 'root', 			'!148972hsfalkjlkfi381', 'elitehacker@shepherd.com',	'What is your favourite flower?', 'Franklin Tree');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6344, 'superuser', 		'!148972hsfalkjlkfi381', 'superman@security.com',	'What is your favourite flower?', 'Jade Vine');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (4524, 'privileged', 		'1489!72hsfalkjlkfi381', 'spoiltbrat@security.com',	'What is your favourite flower?', 'Middlemist Red');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6343, 'mark', 			'148!972hsfalkjlkfi381', 'superman2@security.com',		'What is your favourite flower?', 'Chocolate Cosmos');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6342, 'markdenihan', 	'148!972hsfalkjlkfi381', 'superman3@security.com',		'What is your favourite flower?', 'Ghost Orchid');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6341, 'seanduggan', 		'148972!hsfalkjlkfi381', 'superman4@security.com',	'What is your favourite flower?', 'Jade Vine');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6551, 'rootuser', 		'14897!2hsfalkjlkfi381', 'superman6@security.com',		'What is your favourite flower?', 'Ghost Orchid');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6552, 'adminuser', 		'1489!72hsfalkjlkfi381', 'superman7@security.com',	'What is your favourite flower?', 'Corpse Flower');
+INSERT INTO `BrokenAuthAndSessMangChalSeven`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `secretQuestion`, `secretAnswer`) VALUES (6559, 'shepherd', 		'148972hsfalk!jlkfi381', 'superman8@security.com',		'What is your favourite flower?', 'Gibraltar Campion');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Module Schema Users
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -937,4 +987,8 @@ GRANT UPDATE ON `csrfChallengeFour`.`csrfTokens` TO 'csrfChalFour'@'localhost';
 DROP USER  'randomMoFoName'@'localhost';
 CREATE USER 'randomMoFoName'@'localhost' IDENTIFIED BY 'c2zXlq_ZoT';
 GRANT SELECT ON `BrokenAuthAndSessMangChalSix`.`users` TO 'randomMoFoName'@'localhost';
+
+DROP USER  'randomFlower'@'localhost';
+CREATE USER 'randomFlower'@'localhost' IDENTIFIED BY 'c21-le_6oT';
+GRANT SELECT ON `BrokenAuthAndSessMangChalSeven`.`users` TO 'randomFlower'@'localhost';
 
