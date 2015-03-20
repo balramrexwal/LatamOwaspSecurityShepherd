@@ -974,4 +974,14 @@
 		<servlet-name>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80SecretQuestion</servlet-name>
 		<url-pattern>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80SecretQuestion</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement8</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</servlet-name>
+		<url-pattern>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
