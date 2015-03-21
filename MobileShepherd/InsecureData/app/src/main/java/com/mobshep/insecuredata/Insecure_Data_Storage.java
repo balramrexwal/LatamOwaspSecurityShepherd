@@ -47,11 +47,7 @@ public class Insecure_Data_Storage extends Activity {
 		referenceXML();
 
 		String destinationDir = this.getFilesDir().getParentFile().getPath()+"/databases/";
-		
-		/*
-		String destinationDir = "/data/data/" + getPackageName()
-				+ "/databases/";
-	*/
+
 		String destinationPath = destinationDir + "Members";
 
 		File f = new File(destinationPath);
