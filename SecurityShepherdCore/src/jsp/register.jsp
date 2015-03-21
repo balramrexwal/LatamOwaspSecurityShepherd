@@ -34,7 +34,7 @@ if(request.getSession() != null)
 	if(ses.getAttribute("userName") != null)
 	{
 		//Logging Username
-		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Accessed by: " + ses.getAttribute("userName").toString());
+		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Accessed by: " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
 	}
 }
 String url = (request.getRequestURL()).toString();

@@ -135,21 +135,7 @@ public class Getter
 		catch (SQLException e) 
 		{
 			log.error("Login Failure: " + e.toString());
-			if(userFound)
-			{
-				try
-				{
-					CallableStatement callstmt = conn.prepareCall("call userLock(?)");
-					log.debug("Running account lock function on user '" + userName + "'");
-					callstmt.setString(1, userName);
-					callstmt.execute();
-					log.debug("userLock Executed");
-				}
-				catch (SQLException e1)
-				{
-					log.fatal("Could not run userLock on user: " + e1.toString());
-				}
-			}
+			//Lagging Response
 		}
 		Database.closeConnection(conn);
 		log.debug("$$$ End authUser $$$");
@@ -161,7 +147,7 @@ public class Getter
 	 * @param ApplicationRoot The current running context of an application
 	 * @param moduleId The module identifier 
 	 * @param userId The user identifier
-	 * @return The result key of the module if the user has not completed the level
+	 * @return The result key of the module if the user has not completed the level. 
 	 */
 	public static String checkPlayerResult(String ApplicationRoot, String moduleId, String userId)
 	{
@@ -187,6 +173,45 @@ public class Getter
 		}
 		Database.closeConnection(conn);
 		log.debug("*** END checkPlayerResult ***");
+		return result;
+	}
+	
+	/**
+	 * This method is used to determine if a CSRF level has been completed. A call is made to the DB that returns the CSRF counter for a level. If this counter is greater than 0, the level has been completed
+	 * @param applicationRoot Running context of the application
+	 * @param moduleHash Hash ID of the CSRF module you wish to check if a user has completed
+	 * @param userId the ID of the user to check
+	 * @return True or False value depicting if the user has completed the module
+	 */
+	public static boolean isCsrfLevelComplete (String applicationRoot, String moduleId, String userId)
+	{
+		log.debug("*** Setter.isCsrfLevelComplete ***");
+		
+		boolean result = false;
+		
+		Connection conn = Database.getCoreConnection(applicationRoot);
+		try
+		{
+			log.debug("Preparing csrfLevelComplete call");
+			CallableStatement callstmnt = conn.prepareCall("call csrfLevelComplete(?, ?)");
+			callstmnt.setString(1, moduleId);
+			callstmnt.setString(2, userId);
+			log.debug("moduleId: " + moduleId);
+			log.debug("userId: " + userId);
+			log.debug("Executing csrfLevelComplete");
+			ResultSet resultSet = callstmnt.executeQuery();
+			resultSet.next();
+			result = resultSet.getInt(1) > 0; // If Result is > 0, then the CSRF level is complete
+			if(result)
+				log.debug("CSRF Level is complete");
+		}
+		catch(SQLException e)
+		{
+			log.error("csrfLevelComplete Failure: " + e.toString());
+			result = false;
+		}
+		Database.closeConnection(conn);
+		log.debug("*** END isCsrfLevelComplete ***");
 		return result;
 	}
 	
@@ -1065,7 +1090,7 @@ public class Getter
 	 * Returns true if a module has a hard coded key, false if server encrypts it
 	 * @param ApplicationRoot The current running context of the application
 	 * @param moduleId The id of the module 
-	 * @return
+	 * @return Returns true if a module has a hard coded key, false if server encrypts it
 	 */
 	public static boolean getModuleKeyType (String ApplicationRoot, String moduleId)
 	{

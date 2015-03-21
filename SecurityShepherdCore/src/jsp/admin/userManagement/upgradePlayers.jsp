@@ -42,7 +42,7 @@ if (Validate.validateAdminSession(ses) && tokenCookie != null)
 {
 
 //Logging Username
-ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Accessed by: " + ses.getAttribute("userName").toString());
+ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Accessed by: " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
 // Getting Session Variables
 //This encoder should escape all output to prevent XSS attacks. This should be performed everywhere for safety
 Encoder encoder = ESAPI.encoder();

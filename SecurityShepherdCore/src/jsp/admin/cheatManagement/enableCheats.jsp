@@ -34,7 +34,7 @@ try
 }
 catch(Exception htmlE)
 {
-	ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "DEBUG(enableCheats.jsp): tokenCookie Error:" + htmlE.toString());
+	ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "DEBUG(enableCheats.jsp): tokenCookie Error:" + htmlE.toString(), ses.getAttribute("userName"));
 }
 // validateAdminSession ensures a valid session, and valid administrator credentials
 // Also, if tokenCookie != null, then the page is good to continue loading

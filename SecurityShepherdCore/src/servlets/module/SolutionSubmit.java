@@ -66,6 +66,7 @@ public class SolutionSubmit extends HttpServlet
 		HttpSession ses = request.getSession(true);
 		if(Validate.validateSession(ses))
 		{
+			ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), ses.getAttribute("userName").toString());
 			log.debug("Current User: " + ses.getAttribute("userName").toString());
 			Cookie tokenCookie = Validate.getToken(request.getCookies());
 			Object tokenParmeter = request.getParameter("csrfToken");
@@ -109,7 +110,7 @@ public class SolutionSubmit extends HttpServlet
 							storedResult += Hash.getCurrentSalt(); //Add server solution salt to base key before compare with decrypted key
 							validKey = storedResult.compareTo(decryptedKey) == 0;
 							log.debug("Decrypted Submitted Key: " + decryptedKey);
-							log.debug("Stored Expected Key: " + storedResult);
+							log.debug("Stored Expected Key    : " + storedResult);
 							
 						}
 						if(validKey)

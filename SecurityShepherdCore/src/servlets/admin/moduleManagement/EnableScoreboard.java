@@ -61,6 +61,7 @@ public class EnableScoreboard extends HttpServlet
 		HttpSession ses = request.getSession(true);
 		if(Validate.validateAdminSession(ses))
 		{
+			ShepherdLogManager.setRequestIp(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), ses.getAttribute("userName").toString());
 			String htmlOutput = new String();
 			Cookie tokenCookie = Validate.getToken(request.getCookies());
 			Object tokenParmeter = request.getParameter("csrfToken");

@@ -113,15 +113,24 @@ public class Login extends HttpServlet
 			   }
 		   }
 		   if (mustRedirect) 
-		 	{
+		   {
 			  
 			   response.sendRedirect("index.jsp");
 			   return;
-			}
+		   }
 		   else
 		   {
 			   String loginFailed = "Incorrect User name or Password";
 			   ses.setAttribute("loginFailed", loginFailed);
+				//Lagging Response
+				try 
+				{
+				    Thread.sleep(2000);
+				}
+				catch(InterruptedException ex)
+				{
+				    Thread.currentThread().interrupt();
+				}
 			   response.sendRedirect("login.jsp");
 			   return;
 		   }

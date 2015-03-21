@@ -598,29 +598,11 @@
 	
 	<servlet>
 		<servlet-name>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeFour</servlet-class>
+		<servlet-class>servlets.module.challenge.CsrfChallengeFive</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</servlet-name>
 		<url-pattern>/challenges/70b96195472adf3bf347cbc37c34489287969d5ba504ac2439915184d6e5dc49</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeTargetFour</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
-		<url-pattern>/user/csrfchallengefour/plusplus</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeFive</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
-		<url-pattern>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -633,12 +615,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
 		<servlet-class>servlets.module.challenge.CsrfChallengeSix</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
-		<url-pattern>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</url-pattern>
+		<servlet-name>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</servlet-name>
+		<url-pattern>/challenges/2fff41105149e507c75b5a54e558470469d7024929cf78d570cd16c03bee3569</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -651,12 +633,48 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>/user/csrfchallengesix/getToken</servlet-name>
-		<servlet-class>servlets.module.challenge.CsrfChallengeSixGetToken</servlet-class>
+		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeSeven</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>/user/csrfchallengesix/getToken</servlet-name>
-		<url-pattern>/user/csrfchallengesix/getToken</url-pattern>
+		<servlet-name>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</servlet-name>
+		<url-pattern>/challenges/7d79ea2b2a82543d480a63e55ebb8fef3209c5d648b54d1276813cd072815df3</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengeseven/plusplus</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeTargetSeven</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengeseven/plusplus</servlet-name>
+		<url-pattern>/user/csrfchallengeseven/plusplus</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeFour</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</servlet-name>
+		<url-pattern>/challenges/84118752e6cd78fecc3563ba2873d944aacb7b72f28693a23f9949ac310648b5</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeTargetFour</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengefour/plusplus</servlet-name>
+		<url-pattern>/user/csrfchallengefour/plusplus</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/user/csrfchallengeseven/getToken</servlet-name>
+		<servlet-class>servlets.module.challenge.CsrfChallengeSevenGetToken</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/user/csrfchallengeseven/getToken</servlet-name>
+		<url-pattern>/user/csrfchallengeseven/getToken</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -877,12 +895,39 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</servlet-name>
+		<servlet-class>servlets.module.challenge.UrlAccess3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</servlet-name>
+		<url-pattern>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</servlet-name>
+		<servlet-class>servlets.module.challenge.UrlAccess3UserList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</servlet-name>
+		<url-pattern>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>/challenges/2da053b4afb1530a500120a49a14d422ea56705a7e3fc405a77bc269948ccae1</servlet-name>
 		<servlet-class>servlets.module.challenge.BrokenCrypto3</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/challenges/2da053b4afb1530a500120a49a14d422ea56705a7e3fc405a77bc269948ccae1</servlet-name>
 		<url-pattern>/challenges/2da053b4afb1530a500120a49a14d422ea56705a7e3fc405a77bc269948ccae1</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</servlet-name>
+		<servlet-class>servlets.module.challenge.BrokenCrypto4</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</servlet-name>
+		<url-pattern>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -919,6 +964,51 @@
 	<servlet-mapping>
 		<servlet-name>/challenges/7aed58f3a00087d56c844ed9474c671f8999680556c127a19ee79fa5d7a132e1ChangePass</servlet-name>
 		<url-pattern>/challenges/7aed58f3a00087d56c844ed9474c671f8999680556c127a19ee79fa5d7a132e1ChangePass</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement6</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</servlet-name>
+		<url-pattern>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316ece</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement6SecretQuestion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</servlet-name>
+		<url-pattern>/challenges/b5e1020e3742cf2c0880d4098146c4dde25ebd8ceab51807bad88ff47c316eceSecretQuestion</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement7</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80</servlet-name>
+		<url-pattern>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80SecretQuestion</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement7SecretQuestion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80SecretQuestion</servlet-name>
+		<url-pattern>/challenges/269d55bc0e0ff635dcaeec8533085e5eae5d25e8646dcd4b05009353c9cf9c80SecretQuestion</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</servlet-name>
+		<servlet-class>servlets.module.challenge.SessionManagement8</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</servlet-name>
+		<url-pattern>/challenges/714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

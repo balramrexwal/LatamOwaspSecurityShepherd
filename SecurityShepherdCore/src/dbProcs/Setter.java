@@ -545,36 +545,36 @@ public class Setter
 	 * @param ApplicationRoot Running context of the application
 	 * @return
 	 */
-	public static boolean setCsrfChallengeSixCsrfToken (String userId, String csrfToken, String ApplicationRoot)
+	public static boolean setCsrfChallengeSevenCsrfToken (String userId, String csrfToken, String ApplicationRoot)
 	{
-		log.debug("*** setCsrfChallengeSixToken ***");
+		log.debug("*** setCsrfChallengeSevenToken ***");
 		boolean result = false;
-		Connection conn = Database.getChallengeConnection(ApplicationRoot, "csrfChallengeSix");
+		Connection conn = Database.getChallengeConnection(ApplicationRoot, "csrfChallengeEnumerateTokens");
 		try
 		{
 			boolean updateToken = false;
-			log.debug("Preparing setCsrfChallengeSixToken call");
+			log.debug("Preparing setCsrfChallengeSevenToken call");
 			PreparedStatement callstmnt = conn.prepareStatement("SELECT csrfTokenscol FROM csrfTokens WHERE userId = ?");
 			callstmnt.setString(1, userId);
-			log.debug("Executing setCsrfChallengeSixToken");
+			log.debug("Executing setCsrfChallengeSevenToken");
 			ResultSet rs = callstmnt.executeQuery();
 			if(rs.next())
 			{
 				//Need to Update CSRF token rather than Insert
-				log.debug("CSRF token Found for Challenge 6... Updating");
+				log.debug("CSRF token Found for Challenge 7... Updating");
 				updateToken = true;
 			}
 			else
 			{
-				log.debug("No CSRF token Found for Challenge 6... Creating");
+				log.debug("No CSRF token Found for Challenge 7... Creating");
 			}
 			rs.close();
 			
 			String whatToDo = new String();
 			if(updateToken)
-				whatToDo = "UPDATE `csrfChallengeSix`.`csrfTokens` SET csrfTokenscol = ? WHERE userId = ?";
+				whatToDo = "UPDATE `csrfChallengeEnumTokens`.`csrfTokens` SET csrfTokenscol = ? WHERE userId = ?";
 			else
-				whatToDo = "INSERT INTO `csrfChallengeSix`.`csrfTokens` (`csrfTokenscol`, `userId`) VALUES (?, ?)";
+				whatToDo = "INSERT INTO `csrfChallengeEnumTokens`.`csrfTokens` (`csrfTokenscol`, `userId`) VALUES (?, ?)";
 			callstmnt = conn.prepareStatement(whatToDo);
 			callstmnt.setString(1, csrfToken);
 			callstmnt.setString(2, userId);
@@ -584,10 +584,59 @@ public class Setter
 		}
 		catch(SQLException e)
 		{
-			log.error("CsrfChallenge6 TokenUpdate Failure: " + e.toString());
+			log.error("csrfChallengeEnumTokens TokenUpdate Failure: " + e.toString());
 		}
 		Database.closeConnection(conn);		
 		return result;
+	}
+	
+	/**
+	 * This method is used to store a CSRF Token for a specific user in the csrfChallengeSeven DB Schema. May not necessarily be a new CSRF token after running
+	 * @param userId User Identifier
+	 * @param csrfToken CSRF Token to add to the csrfChallengeSix DB Schema
+	 * @param ApplicationRoot Running context of the application
+	 * @return Returns current CSRF token for user for CSRF Ch7 
+	 */
+	public static String setCsrfChallengeFourCsrfToken (String userId, String csrfToken, String ApplicationRoot)
+	{
+		log.debug("*** setCsrfChallengeSevenToken ***");
+		Connection conn = Database.getChallengeConnection(ApplicationRoot, "csrfChallengeFour");
+		try
+		{
+			boolean tokenExists = false;
+			log.debug("Preparing setSsrfChallengeFourToken call");
+			PreparedStatement callstmnt = conn.prepareStatement("SELECT csrfTokenscol FROM csrfTokens WHERE userId = ?");
+			callstmnt.setString(1, userId);
+			log.debug("Executing setCsrfChallengeFourToken");
+			ResultSet rs = callstmnt.executeQuery();
+			if(rs.next())
+			{
+				//Need to Update CSRF token rather than Insert
+				log.debug("CSRF for Challenge 4 already is set");
+				csrfToken = rs.getString(1); //overwrite token with DB Stored Entry
+				tokenExists = true;
+			}
+			else
+			{
+				log.debug("No CSRF token Found for Challenge 4... Creating");
+			}
+			rs.close();
+			
+			String whatToDo = new String();
+			if(!tokenExists)
+				whatToDo = "INSERT INTO `csrfChallengeFour`.`csrfTokens` (`csrfTokenscol`, `userId`) VALUES (?, ?)";
+			callstmnt = conn.prepareStatement(whatToDo);
+			callstmnt.setString(1, csrfToken);
+			callstmnt.setString(2, userId);
+			callstmnt.execute();
+			callstmnt.close();
+		}
+		catch(SQLException e)
+		{
+			log.error("CsrfChallenge4 TokenUpdate Failure: " + e.toString());
+		}
+		Database.closeConnection(conn);		
+		return csrfToken;
 	}
 	
 	/**

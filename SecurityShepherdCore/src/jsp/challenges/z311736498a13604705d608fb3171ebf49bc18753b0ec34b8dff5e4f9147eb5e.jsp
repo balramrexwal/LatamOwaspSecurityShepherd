@@ -22,6 +22,7 @@
  * @author Mark Denihan
  */
  String levelName = "CSRF Challenge 2";
+ String levelHash = new String("z311736498a13604705d608fb3171ebf49bc18753b0ec34b8dff5e4f9147eb5e");
  ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " Accessed");
  if (request.getSession() != null)
  {
@@ -40,7 +41,7 @@
  	// If tokenCookie == null, then the page is not going to continue loading
  	if (Validate.validateSession(ses) && tokenCookie != null)
  	{
- 		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " has been accessed by " + ses.getAttribute("userName").toString());
+ 		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " has been accessed by " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
  		// Getting Session Variables
 		//This encoder should escape all output to prevent XSS attacks. This should be performed everywhere for safety
 		Encoder encoder = ESAPI.encoder();
@@ -76,7 +77,16 @@
 				Where exampleId is the ID of the user who's CSRF counter is been incremented. Your ID is <a><%= userId %></a>
 				<br/>
 				<br/>
-				You can use the CSRF forum below to post a message with HTML.				
+				You can use the CSRF forum below to post a message with HTML.
+				<% 
+				String moduleId = Getter.getModuleIdFromHash(ApplicationRoot, levelHash);	
+				if (Getter.isCsrfLevelComplete(ApplicationRoot, moduleId, userId)) 
+				{ %>
+					<h2 class='title'>This CSRF Challenge has been Completed</h2>
+					<p>
+					Congratulations, you have completed this CSRF challenge by successfully carrying out a CSRF attack on another user for this level's target. The result key is 
+					<b><a><%=	encoder.encodeForHTML(Hash.generateUserSolution(Getter.getModuleResult(ApplicationRoot, moduleId), (String)ses.getAttribute("userName"))) %></a></b><br/><br/>
+				<% } %>			
 				<form id="leForm" action="javascript:;">
 					<table>
 					<tr><td>
@@ -93,7 +103,7 @@
 				</form>
 				
 				<div id="resultsDiv">
-					<%= Getter.getCsrfForumWithIframe(ApplicationRoot, userClass, Getter.getModuleIdFromHash(ApplicationRoot, "z311736498a13604705d608fb3171ebf49bc18753b0ec34b8dff5e4f9147eb5e")) %>
+					<%= Getter.getCsrfForumWithIframe(ApplicationRoot, userClass, Getter.getModuleIdFromHash(ApplicationRoot, levelHash)) %>
 				</div>
 			</p>
 		</div>
@@ -106,7 +116,7 @@
 					var ajaxCall = $.ajax({
 						dataType: "text",
 						type: "POST",
-						url: "z311736498a13604705d608fb3171ebf49bc18753b0ec34b8dff5e4f9147eb5e",
+						url: "<%= levelHash %>",
 						data: {
 							myMessage: theMessage,
 							csrfToken: "<%= csrfToken %>"
