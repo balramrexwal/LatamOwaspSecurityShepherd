@@ -963,6 +963,61 @@ COMMIT;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
+-- Failure to Restrict URL Access Challenge Three Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP SCHEMA IF EXISTS `UrlAccessThree` ;
+CREATE SCHEMA IF NOT EXISTS `UrlAccessThree` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `UrlAccessThree` ;
+
+-- -----------------------------------------------------
+-- Table `UrlAccessThree`.`users`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `UrlAccessThree`.`users` (
+  `userId` INT NOT NULL ,
+  `userName` VARCHAR(32) NOT NULL ,
+  `userPassword` VARCHAR(128) NOT NULL ,
+  `userAddress` VARCHAR(128) NOT NULL ,
+  `userRole` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`userId`) )
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `UrlAccessThree`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `UrlAccessThree`;
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (1223, 'aGuest', 		'!14897-hs.alNj.kFim81', 'zoidberg23@shepherd.com', 'guest');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (1224, 'manager', 		'!14897-hs.alNj.kFim81', 'zoidberg23@shepherd.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (1225, 'sean',	 		'!14897-hs.alNj.kFim81', 'zoidberg24@shepherd.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (3214, 'administrator', 	'!14897-hs.alNj.kFim81', 'buzzthebald@shepherd.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (3212, 'root', 			'!14897-hs.alNj.kFim81', 'elitehacker@shepherd.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6344, 'superuser', 		'!14897-hs.alNj.kFim81', 'superman@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6345, 'MrJohnReillyTheSecond', 		'!14897-hs.alNj.kFim81', 'MrJohnReillyTheSecond@security.com', 'superadmin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6346, 'megauser', 		'!14897-hs.alNj.kFim81', 'megaman@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6347, 'hyperuser', 		'!14897-hs.alNj.kFim81', 'hmegaman@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6348, 'godzilla', 		'!14897-hs.alNj.kFim81', 'godzilla@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6349, 'kinguser', 		'!14897-hs.alNj.kFim81', 'kinguser@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (4524, 'privileged', 		'1489!72hsfalkjlkfi381', 'spoiltbrat@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6343, 'mark', 			'148!97-hs.alNj.kFim81', 'superman2@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6342, 'markdenihan', 	'148!97-hs.alNj.kFim81', 'superman3@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6341, 'seanduggan', 		'148972!hsfalkjlkfi381', 'superman4@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6551, 'rootuser', 		'14897!2hsfalkjlkfi381', 'superman6@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6552, 'adminuser', 		'1489!72hsfalkjlkfi381', 'superman7@security.com', 'admin');
+INSERT INTO `UrlAccessThree`.`users` (`userId`, `userName`, `userPassword`, `userAddress`, `userRole`) VALUES (6559, 'shepherd', 		'148972hsfalk!jlkfi381', 'superman8@security.com', 'admin');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Module Schema Users
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -1067,3 +1122,7 @@ DROP USER 'tSwsfUSer'@'localhost';
 CREATE USER 'tSwsfUSer'@'localhost' IDENTIFIED BY '9s31iusd-n';
 GRANT SELECT ON `CryptShop`.`items` TO 'tSwsfUSer'@'localhost';
 GRANT SELECT ON `CryptShop`.`coupons` TO 'tSwsfUSer'@'localhost';
+
+DROP USER  'yourOrEll'@'localhost';
+CREATE USER 'yourOrEll'@'localhost' IDENTIFIED BY '91dj3:766f';
+GRANT SELECT ON `UrlAccessThree`.`users` TO 'yourOrEll'@'localhost';

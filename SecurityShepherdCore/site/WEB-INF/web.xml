@@ -895,6 +895,24 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</servlet-name>
+		<servlet-class>servlets.module.challenge.UrlAccess3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</servlet-name>
+		<url-pattern>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</servlet-name>
+		<servlet-class>servlets.module.challenge.UrlAccess3UserList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</servlet-name>
+		<url-pattern>/challenges/e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4UserList</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>/challenges/2da053b4afb1530a500120a49a14d422ea56705a7e3fc405a77bc269948ccae1</servlet-name>
 		<servlet-class>servlets.module.challenge.BrokenCrypto3</servlet-class>
 	</servlet>

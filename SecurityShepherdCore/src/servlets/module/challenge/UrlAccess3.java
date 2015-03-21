@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 import dbProcs.Getter;
@@ -18,7 +19,7 @@ import utils.ShepherdLogManager;
 import utils.Validate;
 
 /**
- * Session Management Challenge Eight
+ * Failure to Restrict URL Access 3
  * <br/><br/>
  * This file is part of the Security Shepherd Project.
  * 
@@ -37,25 +38,24 @@ import utils.Validate;
  * @author Mark Denihan
  *
  */
-public class SessionManagement8 extends HttpServlet
+public class UrlAccess3 extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static org.apache.log4j.Logger log = Logger.getLogger(SessionManagement8.class);
-	private static String levelName = "Session Management Challenge Eight";
-	private static String levelHash = "714d8601c303bbef8b5cabab60b1060ac41f0d96f53b6ea54705bb1ea4316334";
+	private static org.apache.log4j.Logger log = Logger.getLogger(UrlAccess3.class);
+	private static String levelName = "Failure to Restrict URL Access 3";
+	private static String levelHash = "e40333fc2c40b8e0169e433366350f55c77b82878329570efa894838980de5b4";
 	/**
-	 * Users must take advance of the broken session management in this application by modifying the tracking cookie "challengeRole" which is encoded in ATOM-128. They must modify this cookie to be equal to superuser to access the result key.
-	 * @param returnUserRole Red herring 
-	 * @param returnPassword Red herring 
+	 * Users must take advance of the broken session management in this application by modifying the tracking cookie "currentPerson" which is encoded in Base64. They must modify this cookie to be equal a super admin to access the result key.
+	 * @param userId Red herring that is pre set to d3d9446802a44259755d38e6d163e820
+	 * @param secure Red herring that is pre set to true 
 	 * @param adminDetected Red herring 
-	 * @param challengeRole Cookie encoded ATOM-128 that manages who is signed in to the sub schema
+	 * @param currentPerson Cookie encoded base64 that manages who is signed in to the sub schema
 	 */
 	public void doPost (HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException
 	{
-		String redherringOne = new String("returnUserRole");
-		String redherringTwo = new String("returnPassword");
-		String redherringThr = new String("adminDetected");
+		String redherringOne = new String("userId");
+		String redherringTwo = new String("secure");
 		PrintWriter out = response.getWriter();  
 		out.print(getServletInfo());
 		try
@@ -72,7 +72,7 @@ public class SessionManagement8 extends HttpServlet
 				Cookie theCookie = null;
 				for(i = 0; i < userCookies.length; i++)
 				{
-					if(userCookies[i].getName().compareTo("challengeRole") == 0)
+					if(userCookies[i].getName().compareTo("currentPerson") == 0)
 					{
 						theCookie = userCookies[i];
 						break; //End Loop, because we found the token
@@ -83,21 +83,24 @@ public class SessionManagement8 extends HttpServlet
 				{
 					log.debug("Cookie value: " + theCookie.getValue());
 					
-					if(theCookie.getValue().equals("nmHqLjQknlHs"))
+					if(theCookie.getValue().equals("TXJKb2huUmVpbGx5VGhlU2Vjb25k")) //If decodes to MrJohnReillyTheSecond
 					{
-						log.debug("Super User Cookie detected");
+						log.debug("Super Admin Cookie detected");
 						// Get key and add it to the output
 						String userKey = Hash.generateUserSolution(Getter.getModuleResultFromHash(getServletContext().getRealPath(""), levelHash), (String)ses.getAttribute("userName"));
 						htmlOutput = "<h2 class='title'>Super User Only Club</h2>" +
 								"<p>" +
-								"Welcome super user! Your result key is as follows " +
+								"Welcome super admin! Your result key is as follows " +
 								"<a>" + userKey + "</a>" +
 								"</p>";
 					}
-					else if (!theCookie.getValue().equals("LmH6nmbC"))
+					else if (!theCookie.getValue().equals("YUd1ZXN0")) //If Not "aGuest"
 					{
 						log.debug("Tampered role cookie detected: " + theCookie.getValue());
-						htmlOutput += "<!-- Invalid Role Detected -->";
+						byte[] decodedCookieBytes = Base64.decodeBase64(theCookie.getValue());
+						String decodedCookie = new String(decodedCookieBytes, "UTF-8");
+						log.debug("Decoded Cookie: " + decodedCookie);
+						htmlOutput = "<!-- Invalid User Detected -->";
 					}
 					else
 					{
@@ -112,30 +115,40 @@ public class SessionManagement8 extends HttpServlet
 				{
 					log.debug("Challenge Not Complete");
 					boolean hackDetected = false;
-					hackDetected = !(request.getParameter(redherringOne) != null && request.getParameter(redherringTwo) != null && request.getParameter(redherringThr) != null);
+					boolean badUserId = false;
+					hackDetected = !(request.getParameter(redherringOne) != null && request.getParameter(redherringTwo) != null);
 					if(!hackDetected)
 					{
 						String paramOne = request.getParameter(redherringOne).toString();
 						String paramTwo = request.getParameter(redherringTwo).toString();
-						String paramThr = request.getParameter(redherringThr).toString();
 						log.debug("Param value of " + redherringOne + ":" + paramOne);
 						log.debug("Param value of " + redherringTwo + ":" + paramTwo);
-						log.debug("Param value of " + redherringThr + ":" + paramThr);
-						hackDetected = !(paramOne.equalsIgnoreCase("false") && paramTwo.equalsIgnoreCase("false") && paramThr.equalsIgnoreCase("false"));
+						badUserId = paramOne.equalsIgnoreCase("d3d9446802a44259755d38e6d163e820");
+						hackDetected = !badUserId && !paramTwo.equalsIgnoreCase("true");
 					}
 					if(!hackDetected)
 					{
-						htmlOutput = "<h2 class='title'>You're not a privileged User!!!</h2>" +
+						htmlOutput = "<h2 class='title'>You're not a Super Admin!!!</h2>" +
 								"<p>" +
-								"Stay away from the privileged only section. The super aggressive dogs have been released." +
+								"Stay away from the super admin only section. The mighty dog beasts have been released." +
 								"</p>";
 					}
 					else
 					{
-						htmlOutput = "<h2 class='title'>HACK DETECTED</h2>" +
+						if(badUserId)
+						{
+							htmlOutput = "<h2 class='title'>Who are you?</h2>" +
 								"<p>" +
-								"A possible attack has been detected. Functionality Stopped before any damage was done" +
+								"System could not process user identifier submitted. The admin list has been notified of the event" +
 								"</p>";
+						}
+						else
+						{
+							htmlOutput = "<h2 class='title'>HACK DETECTED</h2>" +
+									"<p>" +
+									"A possible attack has been detected. Functionality Stopped before any damage was done" +
+									"</p>";
+						}
 					}
 				}
 				log.debug("Outputting HTML");

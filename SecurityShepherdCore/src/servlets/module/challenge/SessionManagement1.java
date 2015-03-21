@@ -105,7 +105,7 @@ public class SessionManagement1 extends HttpServlet
 					
 					if(!hackDetected)
 					{
-						htmlOutput = "<h2 class='title'>Your not an Admin!!!</h2>" +
+						htmlOutput = "<h2 class='title'>You're not an Admin!!!</h2>" +
 								"<p>" +
 								"Stay away from the admin only section. The dogs have been released." +
 								"</p>";
