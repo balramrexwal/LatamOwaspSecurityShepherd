@@ -488,8 +488,8 @@ INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `
 INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (2, 2, 'Towels still wet', 'Need to increase the environments draft rate and heating so drying time ');
 INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (1, 3, 'Level Solution', 'The key for this level is 1f71d61d65e5f03d3924588cf5970030dadade5713e53819505d56b90791ce03');
 INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (1, 5, 'Spelling Error', 'Run a spell check in the Controller responses. Its annoying that greek guy');
-INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (2, 5, 'Bad Crypto', 'Got a note from that Greek guy saying he wants to fix that he wasnt happy with the non standard vigenere cipher for the crypto. I told him nobody would even know so he\'s fine');
-INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (3, 5, 'Add a new Role', 'Need to add a new role to the server. So I better figure out what the password needs to be for a \'viewr\'. Has to be 5 characters or the role sentence doesn\'t read properly.');
+INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (2, 5, 'Bad Crypto', "Got a note from that Greek guy saying he wants to fix that he wasnt happy with the non standard vigenere cipher for the crypto. I told him nobody would even know so he\'s fine");
+INSERT INTO `bugTrackingBug`.`projectBugs` (`bugId`, `projectId`, `shortDesc`, `longDesc`) VALUES (3, 5, 'Add a new Role', "Need to add a new role to the server. So I better figure out what the password needs to be for a \'viewr\'. Has to be 5 characters or the role sentence doesn\'t read properly.");
 
 COMMIT;
 
@@ -892,6 +892,77 @@ COMMIT;
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
+-- CryptShop Schema
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS `CryptShop` ;
+CREATE SCHEMA IF NOT EXISTS `CryptShop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `CryptShop` ;
+
+-- -----------------------------------------------------
+-- Table `CryptShop`.`items`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CryptShop`.`items` (
+  `itemId` INT NOT NULL,
+  `itemName` VARCHAR(45) NULL,
+  `itemCost` INT NULL,
+  PRIMARY KEY (`itemId`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `CryptShop`.`coupons`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CryptShop`.`coupons` (
+  `couponId` INT NOT NULL,
+  `perCentOff` INT NULL,
+  `couponCode` VARCHAR(128) NULL,
+  `itemId` INT NOT NULL,
+  PRIMARY KEY (`couponId`),
+  INDEX `fk_coupons_items_idx` (`itemId` ASC),
+  CONSTRAINT `fk_coupons_items`
+    FOREIGN KEY (`itemId`)
+    REFERENCES `CryptShop`.`items` (`itemId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `CryptShop`.`items`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `CryptShop`;
+INSERT INTO `CryptShop`.`items` (`itemId`, `itemName`, `itemCost`) VALUES (1, 'MeGusta', 30);
+INSERT INTO `CryptShop`.`items` (`itemId`, `itemName`, `itemCost`) VALUES (2, 'Troll', 3000);
+INSERT INTO `CryptShop`.`items` (`itemId`, `itemName`, `itemCost`) VALUES (3, 'Rage', 45);
+INSERT INTO `CryptShop`.`items` (`itemId`, `itemName`, `itemCost`) VALUES (4, 'NotBad', 15);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `CryptShop`.`coupons`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `CryptShop`;
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (1, 100, 'PleaseTakeARage', 3);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (2, 100, 'RageMemeForFree', 3);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (3, 10, 'PleaseTakeATroll', 2);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (4, 50, 'HalfOffTroll', 2);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (5, 10, 'PleaseTakeANotBad', 4);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (6, 50, 'HalfOffNotBad', 4);
+INSERT INTO `CryptShop`.`coupons` (`couponId`, `perCentOff`, `couponCode`, `itemId`) VALUES (432197, 100, 'e!c!3etZoumo@Stu4rU176', 2);
+COMMIT;
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Module Schema Users
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -992,3 +1063,7 @@ DROP USER  'randomFlower'@'localhost';
 CREATE USER 'randomFlower'@'localhost' IDENTIFIED BY 'c21-le_6oT';
 GRANT SELECT ON `BrokenAuthAndSessMangChalSeven`.`users` TO 'randomFlower'@'localhost';
 
+DROP USER 'tSwsfUSer'@'localhost';
+CREATE USER 'tSwsfUSer'@'localhost' IDENTIFIED BY '9s31iusd-n';
+GRANT SELECT ON `CryptShop`.`items` TO 'tSwsfUSer'@'localhost';
+GRANT SELECT ON `CryptShop`.`coupons` TO 'tSwsfUSer'@'localhost';

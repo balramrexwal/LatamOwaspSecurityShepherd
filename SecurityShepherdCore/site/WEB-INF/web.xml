@@ -904,6 +904,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</servlet-name>
+		<servlet-class>servlets.module.challenge.BrokenCrypto4</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</servlet-name>
+		<url-pattern>/challenges/b927fc4d8c9f70a78f8b6fc46a0cc18533a88b2363054a1f391fe855954d12f9</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>/challenges/ec43ae137b8bf7abb9c85a87cf95c23f7fadcf08a092e05620c9968bd60fcba6</servlet-name>
 		<servlet-class>servlets.module.challenge.SessionManagement4</servlet-class>
 	</servlet>
