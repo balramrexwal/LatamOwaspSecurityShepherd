@@ -302,6 +302,68 @@ public class Setter
 	}
 	
 	/**
+	 * Used to increment bad submission counter in DB. DB will handle point deductions once the counter hits 40
+	 * @param ApplicationRoot application running context
+	 * @param userId user identifier to increment 
+	 * @return False if the statement fails to execute
+	 */
+	public static boolean incrementBadSubmission(String ApplicationRoot, String userId)
+	{
+		log.debug("*** Setter.incrementBadSubmission ***");
+		
+		boolean result = false;
+		Connection conn = Database.getCoreConnection(ApplicationRoot);
+		try
+		{
+			log.debug("Prepairing bad Submission call");
+			PreparedStatement callstmnt = conn.prepareCall("CALL userBadSubmission(?)");
+			callstmnt.setString(1, userId);
+			log.debug("Executing userBadSubmission statement on id '" + userId + "'");
+			callstmnt.execute();
+			result = true;
+		}
+		catch(SQLException e)
+		{
+			log.error("userBadSubmission Failure: " + e.toString());
+			result = false;
+		}
+		Database.closeConnection(conn);
+		log.debug("*** END userBadSubmisison ***");
+		return result;
+	}
+	
+	/**
+	 * Resets user bad submission counter to 0
+	 * @param ApplicationRoot Application's running context
+	 * @param userId User Identifier to reset
+	 * @return
+	 */
+	public static boolean resetBadSubmission(String ApplicationRoot, String userId)
+	{
+		log.debug("*** Setter.resetBadSubmission ***");
+		
+		boolean result = false;
+		Connection conn = Database.getCoreConnection(ApplicationRoot);
+		try
+		{
+			log.debug("Prepairing resetUserBadSubmission call");
+			PreparedStatement callstmnt = conn.prepareCall("CALL resetUserBadSubmission(?)");
+			callstmnt.setString(1, userId);
+			log.debug("Executing resetUserBadSubmission statement on id '" + userId + "'");
+			callstmnt.execute();
+			result = true;
+		}
+		catch(SQLException e)
+		{
+			log.error("resetUserBadSubmission Failure: " + e.toString());
+			result = false;
+		}
+		Database.closeConnection(conn);
+		log.debug("*** END resetBadSubmission ***");
+		return result;
+	}
+	
+	/**
 	 * This method sets every module status to Open.
 	 * @param ApplicationRoot Current running director of the application
 	 * @param moduleId The identifier of the module that is been set to open status

@@ -38,6 +38,7 @@ CREATE  TABLE IF NOT EXISTS `core`.`users` (
   `goldMedalCount` INT NOT NULL DEFAULT 0 ,
   `silverMedalCount` INT NOT NULL DEFAULT 0 ,
   `bronzeMedalCount` INT NOT NULL DEFAULT 0 ,
+  `badSubmissionCount` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userId`) ,
   INDEX `classId` (`classId` ASC) ,
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) ,
@@ -883,6 +884,49 @@ END
 $$
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure userBadSubmission
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`userBadSubmission` (IN theUserId VARCHAR(64))
+BEGIN
+UPDATE users SET
+    badSubmissionCount = badSubmissionCount + 1
+    WHERE userId = theUserId;
+COMMIT;
+UPDATE users SET
+	userScore = userScore - userScore/10
+	WHERE userId = theUserId AND badSubmissionCount > 40 AND userScore > 5;
+COMMIT;
+UPDATE users SET 
+	userScore = userScore - 10
+	WHERE userId = theUserId AND badSubmissionCount > 40 AND userScore <= 5;
+COMMIT;
+END
+$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure resetUserBadSubmission
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`resetUserBadSubmission` (IN theUserId VARCHAR(64))
+BEGIN
+UPDATE users SET
+    badSubmissionCount = 0
+    WHERE userId = theUserId;
+COMMIT;
+END
+$$
+
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- procedure moduleComplete
 -- -----------------------------------------------------
@@ -1354,7 +1398,7 @@ CALL cheatsheetCreate('9e46e3c8bde42dc16b9131c0547eedbf265e8f16', "The key is no
 CALL cheatsheetCreate('1506f22cd73d14d8a73e0ee32006f35d4f234799', 'Logs are stored insecurely on the App. These contain the key. The logs can be found in a directory called \"files\" within the app package in the data/data directory. Every time the app is interacted with, new logs are generated. ');
 CALL cheatsheetCreate('831cea34ab83d523cf04cf2d3fc1b908361fa42f', 'Logs, however this time the user has revealed the answers to their secret questions in order to reset the password. Investigate the logs, get the secret questions and reset the password to login. The answers are \"Chicken\" and \"Meade\". Once logged in, the key will be revealed.');
 CALL cheatSheetCreate('ed732e695b85baca21d80966306a9ab5ec37477f', "In this challenge you must craft a HTTP request to reset an admin accounts password. The HTTP request is described in the javascript contained in the challenge page (The last function in the script). The token value in this request must be a base 64 encoded date time value such as the following;<br><br> <b>Thu Aug 28 18:48:10 BST 2014</b><br><br> The token value must be less than 10 minutes from the servers time.");
-CALL cheatSheetCreate('cfbf7b915ee56508ad46ab79878f37fd9afe0d27'. "To complete this challenge a user must craft a CSRF attack that sends a POST request, to the request described in the challenge write up, with their CSRF token. This CSRF Token will work on any user.");
+CALL cheatSheetCreate('cfbf7b915ee56508ad46ab79878f37fd9afe0d27', "To complete this challenge a user must craft a CSRF attack that sends a POST request, to the request described in the challenge write up, with their CSRF token. This CSRF Token will work on any user.");
 CALL cheatSheetCreate('9294ba32bdbd680e3260a0315cd98bf6ce8b69bd', "The first step in completing this challenge is to get an admin user's email address. Try to sign in as 'root' or 'superuser' to get one. To complete this challenge a user must use SQL Injection in the email Parameter in the GET request to the SecretQuestion servlet. The following email submission will achieve the response of the users secret answer (This example is URL Encoded)<br><br/>&quot;UNION+SELECT+secretAnswer+FROM+users+WHERE+userName=&quot;<b>root</b><br><br>You can then use this answer along with a user email address to complete the level.");
 CALL cheatSheetCreate('7153290d128cfdef5f40742dbaeb129a36ac2340', "To complete this challenge a user must send the server a request with the 'challengeRole' value set to 'nmHqLjQknlHs'. The challengeRole cookie is encoded with ATOM-128. The value 'nmHqLjQknlHs' when decoded is 'superuser'.");
 CALL cheatSheetCreate('145111e80400e4fd48bd3aa5aca382e9c5640793', "To complete this challenge a user must deobfusticate the javascript found in /couponCheck.js and extract the relevent cyrpto information to manually decrypt a javascript array of encrypted coupons, or to manipulate the javascript so that it returns the decrypted coupons. The Coupon code for free trolls is <b>e!c!3etZoumo@Stu4rU176</b>");
