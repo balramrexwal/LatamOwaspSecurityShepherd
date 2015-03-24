@@ -1634,10 +1634,10 @@ public class Getter
 		return levelMasterList;
 	}
 	
-	private static int fieldTrainingCap = 30;
-	private static int corporalCap = 60;
-	private static int sergeantCap = 90;
-	private static int majorCap = 120;
+	private static int fieldTrainingCap = 50;
+	private static int corporalCap = 100;
+	private static int sergeantCap = 150;
+	private static int majorCap = 200;
 	private static int admiralCap = 999; //everything above Major is Admiral
 	private static int getTounnamentSectionFromRankNumber (int rankNumber)
 	{
