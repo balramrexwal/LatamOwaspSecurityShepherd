@@ -231,6 +231,49 @@ END
 $$
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure suspendUser
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`suspendUser` (theId VARCHAR(64), theMins INT)
+BEGIN
+DECLARE theDate DATETIME;
+COMMIT;
+SELECT NOW() FROM DUAL INTO theDate;
+UPDATE `users` SET
+    suspendedUntil = TIMESTAMPADD(MINUTE, theMins, theDate)
+    WHERE userId = theId;
+COMMIT;
+END
+
+$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure unSuspendUser
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`unSuspendUser` (theId VARCHAR(64))
+BEGIN
+DECLARE theDate DATETIME;
+COMMIT;
+SELECT NOW() FROM DUAL INTO theDate;
+UPDATE `users` SET
+    suspendedUntil = theDate
+    WHERE userId = theId;
+COMMIT;
+END
+
+$$
+
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- procedure userFind
 -- -----------------------------------------------------
@@ -359,6 +402,27 @@ UPDATE users SET
     WHERE userPass = SHA2(currentPassword, 512)
     AND userName = theUserName
     AND suspendedUntil < theDate;
+COMMIT;
+END
+
+$$
+
+DELIMITER ;
+-- -----------------------------------------------------
+-- procedure userPasswordChangeAdmin
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `core`$$
+CREATE PROCEDURE `core`.`userPasswordChangeAdmin` (IN theUserId VARCHAR(64), IN newPassword VARCHAR(512))
+BEGIN
+DECLARE theDate DATETIME;
+COMMIT;
+SELECT NOW() FROM DUAL INTO theDate;
+UPDATE users SET
+    userPass = SHA2(newPassword, 512),
+    tempPassword = FALSE
+    WHERE userId = theUserId;
 COMMIT;
 END
 

@@ -128,6 +128,33 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>/suspendPlayer</servlet-name>
+		<servlet-class>servlets.admin.userManagement.SuspendUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/suspendPlayer</servlet-name>
+		<url-pattern>/suspendPlayer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/unSuspendPlayer</servlet-name>
+		<servlet-class>servlets.admin.userManagement.UnSuspendUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/unSuspendPlayer</servlet-name>
+		<url-pattern>/unSuspendPlayer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/giveTakePoints</servlet-name>
+		<servlet-class>servlets.admin.userManagement.GiveTakePoints</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/giveTakePoints</servlet-name>
+		<url-pattern>/giveTakePoints</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>/upgradePlayer</servlet-name>
 		<servlet-class>servlets.admin.userManagement.UpgradePlayer</servlet-class>
 	</servlet>
@@ -143,6 +170,15 @@
 	<servlet-mapping>
 		<servlet-name>/updateRegistration</servlet-name>
 		<url-pattern>/updateRegistration</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/changeUserPassword</servlet-name>
+		<servlet-class>servlets.admin.userManagement.ChangeUserPassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/changeUserPassword</servlet-name>
+		<url-pattern>/changeUserPassword</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

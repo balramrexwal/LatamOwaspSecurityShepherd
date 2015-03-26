@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import utils.Hash;
 import utils.ShepherdLogManager;
+import utils.UserKicker;
 import dbProcs.Getter;
 
 /**
@@ -105,6 +106,9 @@ public class Login extends HttpServlet
 						   log.debug("Temporary Password Detected, user will be prompted to change");
 						   ses.setAttribute("ChangePassword", "true");
 					   }
+					   
+					   //Removing user from kick list. If they were on it before, their suspension must have ended if they DB authentication Succeeded
+					   UserKicker.removeFromKicklist(user[1]);
 				   }
 			   }
 			   catch(Exception e)
@@ -120,7 +124,7 @@ public class Login extends HttpServlet
 		   }
 		   else
 		   {
-			   String loginFailed = "Incorrect User name or Password";
+			   String loginFailed = "Invalid User name or Password.";
 			   ses.setAttribute("loginFailed", loginFailed);
 				//Lagging Response
 				try 

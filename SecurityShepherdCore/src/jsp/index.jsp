@@ -139,6 +139,10 @@ if (request.getSession() != null)
 										<li><a id="createNewAdminLink" href="javascript:;">Create New Admin</a></li>
 										<li><a id="upgradePlayersLink" href="javascript:;">Upgrade Player to Admin</a></li>
 										<li><a id="addPlayersLink" href="javascript:;">Add Players</a></li>
+										<li><a id="updatePlayerScoreLink" href="javascript:;">Add / Deduct Player Points</a></li>
+										<li><a id="changePlayerPasswordLink" href="javascript:;">Reset Password</a></li>
+										<li><a id="suspendPlayerLink" href="javascript:;">Suspend Player</a></li>
+										<li><a id="unSuspendPlayerLink" href="javascript:;">Cancel Suspension</a></li>
 										<li><a id="createNewClassLink" href="javascript:;">Create Class</a></li>
 										<li><a id="setDefaultClassForRegistrationLink" href="javascript:;">Set Default Player Class</a></li>
 										<li><a id="assignPlayersLink" href="javascript:;">Assign Players to Class</a></li>
