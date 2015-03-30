@@ -43,7 +43,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
     EditText username;
     EditText password;
     EditText key;
-    String hash = "n483jd843hyj23kd032kjdw92";
+    String dbPassword = "n483jd843hyj23kd032kjdw92";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,10 @@ public class CSInjection3 extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.csi);
         th = (TabHost) findViewById(R.id.tabhost);
-        populateTable(this, hash);
+        populateTable(this, dbPassword);
         referenceXML();
         th.setup();
-        generateKey(this, hash);
+        generateKey(this, dbPassword);
 
         TabSpec specs = th.newTabSpec("tag1");
         specs.setContent(R.id.tab1);
@@ -91,7 +91,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
 
                 try {
                     if (login(Name, Pass) == true) {
-                        outputKey(this, hash);
+                        outputKey(this, dbPassword);
                         Toast toast = Toast.makeText(CSInjection3.this,
                                 "Logged in!", Toast.LENGTH_LONG);
                         toast.show();
@@ -134,7 +134,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
                 String dbPath = this.getDatabasePath("Users.db").getPath();
 
                 SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath,
-                        hash, null);
+                        dbPassword, null);
 
                 String query = ("SELECT * FROM Users WHERE memName='" + username
                         + "' AND memPass = '" + password + "';");
@@ -167,7 +167,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
 
     }
 
-    public void populateTable(Context context, String dbpassword) {
+    public void populateTable(Context context, String dbPassword) {
         try {
 
             try {
@@ -180,7 +180,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
                     dbPathFile.getParentFile().mkdirs();
 
                 SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath,
-                        dbpassword, null);
+                        dbPassword, null);
 
                 db.execSQL("DROP TABLE IF EXISTS Users");
                 db.execSQL("CREATE TABLE Users(memID INTEGER PRIMARY KEY AUTOINCREMENT, memName TEXT, memAge INTEGER, memPass VARCHAR)");
@@ -189,7 +189,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 Toast error = Toast.makeText(CSInjection3.this,
-                        "An error occurred.", Toast.LENGTH_LONG);
+                        "An error occurred, table not initialized.", Toast.LENGTH_LONG);
                 error.show();
 
             }
@@ -206,7 +206,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
 
         String dbPath = context.getDatabasePath("key.db").getPath();
 
-        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath, hash,
+        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath, dbPassword,
                 null);
 
         String query = ("SELECT * FROM key;");
@@ -237,7 +237,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
                     dbPathFile.getParentFile().mkdirs();
 
                 SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath,
-                        hash, null);
+                        dbPassword, null);
 
                 db.execSQL("DROP TABLE IF EXISTS key");
                 db.execSQL("CREATE TABLE key(key VARCHAR)");
@@ -247,7 +247,7 @@ public class CSInjection3 extends Activity implements OnClickListener {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 Toast error = Toast.makeText(CSInjection3.this,
-                        "An error occurred.", Toast.LENGTH_LONG);
+                        "An error occurred, key was not generated", Toast.LENGTH_LONG);
                 error.show();
 
             }

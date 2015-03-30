@@ -1,11 +1,15 @@
 package com.mobshep.brokencrypto4;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +27,7 @@ public class BrokenCrypto4 extends ActionBarActivity {
         setContentView(R.layout.activity_broken_crypto4);
 
         generateKey();
+        generateDB(this);
 
     }
 
@@ -109,6 +114,36 @@ public class BrokenCrypto4 extends ActionBarActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public void generateDB(Context context) {
+        try {
+            SQLiteDatabase.loadLibs(context);
+
+            String dbPath = context.getDatabasePath("key.db").getPath();
+
+            File dbPathFile = new File(dbPath);
+            if (!dbPathFile.exists())
+                dbPathFile.getParentFile().mkdirs();
+
+            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbPath,
+                    "Pa88w0rd1234", null);
+
+            db.execSQL("DROP TABLE IF EXISTS key");
+            db.execSQL("CREATE TABLE key(key VARCHAR)");
+
+            db.execSQL("INSERT INTO key VALUES('The Key is $haveThe$kies.')");
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            Toast error = Toast.makeText(BrokenCrypto4.this,
+                    "An error occurred.", Toast.LENGTH_LONG);
+            error.show();
+
+        }
+
     }
 
     public void generateKey()

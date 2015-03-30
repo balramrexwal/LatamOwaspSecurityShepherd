@@ -80,14 +80,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#DA70D6" />
 
-    <TextView
-        android:id="@+id/tempPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tempPass"
-        android:layout_marginLeft="92dp"
-        android:layout_toRightOf="@+id/tvQuestion2"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#DA70D6" />
 
 </RelativeLayout>

@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
                 android:filterTouchesWhenObscured="true"
-                android:onClicked="generateKey"
+                android:onClick="generateKey"
                 android:text="Generate Key"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"

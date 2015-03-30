@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.mobshep.poorauthentication"
+        applicationId "com.mobshep.udataleakage2"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
