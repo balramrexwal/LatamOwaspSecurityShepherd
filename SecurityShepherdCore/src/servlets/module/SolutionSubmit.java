@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.Encoder;
 
-import servlets.OneTimePad;
 import utils.FeedbackStatus;
 import utils.Hash;
 import utils.ModulePlan;
@@ -136,13 +135,15 @@ public class SolutionSubmit extends HttpServlet
 									result = Setter.updatePlayerResult(ApplicationRoot, moduleId, userId, "Feedback is Disabled", 1, 1, 1);
 									if(result != null)
 									{
-										log.debug("User Result for module " + result + " succeeded");
+										log.debug("Solution Submission for module " + result + " succeeded");
 										htmlOutput = new String("<h2 class=\"title\">Solution Submission Success</h2><br>" +
 												"<p>" +
 												encoder.encodeForHTML(result) + " completed! Congratulations.");
 										htmlOutput += "</p>";
 										if(ModulePlan.isIncrementalFloor())
 											htmlOutput += FeedbackSubmit.refreshMenuScript(encoder.encodeForHTML((String)tokenParmeter));
+										log.debug("Resetting user's Bad Submisison count to 0");
+										Setter.resetBadSubmission(ApplicationRoot, userId);
 										out.write(htmlOutput);
 									}
 									else
@@ -166,11 +167,15 @@ public class SolutionSubmit extends HttpServlet
 						}
 						else
 						{
-							log.debug("Incorrect key submitted, returning error");
+							log.error("Incorrect key submitted, returning error");
 							out.print("<h2 class=\"title\">Solution Submission Failure</h2><br>" +
 									"<p><font color=\"red\">" +
-									"Incorrect Solution Key Submitted." +
+									"Incorrect Solution Key Submitted.<br><br>You have limited amounts of incorrect key submissions before you will loose 10% of your points. Contact the OWASP Security Shepherd if you think you have found the correct key but it is failing you." +
 									"</font></p>");
+							
+							log.error("Invoking Bad Submission procedure...");
+							Setter.incrementBadSubmission(ApplicationRoot, userId);
+							log.error(userName + " has been warned and potentially has lost points");
 						}
 					}
 					else

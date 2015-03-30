@@ -138,6 +138,22 @@ public class Validate
 	}
 
 	/**
+	 * Invalid password detecter
+	 * @param passWord
+	 * @return
+	 */
+	public static boolean isValidPassword(String passWord)
+	{
+		boolean result = false;
+		result = passWord.length() > 7 && passWord.length() <= 512;
+		if (!result)
+		{
+			log.debug("Invalid Password detected");
+		}
+		return result;
+	}
+	
+	/**
 	 * Used to validate user creation requests
 	 * @param userName User Name
 	 * @param passWord User Password
@@ -333,6 +349,18 @@ public class Validate
 						result = (role.compareTo("player") == 0 || role.compareTo("admin") == 0);
 						if(!result)
 							log.fatal("User Role Parameter Tampered. Role = " + role);
+						else
+						{
+							String userName = ses.getAttribute("userName").toString();
+							//Has the user been suspended? Should they be kicked?
+							if(UserKicker.shouldKickUser(userName))
+							{
+								log.debug(userName + " has been Suspended. Invalidating Session and Reporting Invalid Session");
+								ses.invalidate(); //Killing Session
+								result = false; //User will not access function they were attempting to call
+								UserKicker.removeFromKicklist(userName); //Removing from kick list, as they are now authenticated, the DB Layer Suspension will prevent them from signing in
+							}
+						}
 					} 
 					catch (Exception e) 
 					{

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=iso-8859-1" language="java" import="utils.*" errorPage="" %>
 <%
 /**
- * SQL Injection Challenge One
+ * SQL Injection Challenge 7
  * <br/><br/>
  * This file is part of the Security Shepherd Project.
  * 
@@ -21,7 +21,8 @@
  * @author Mark Denihan
  */
 
-String levelName = "SQL Injection Challenge One";
+ String levelName = "SQL Injection Challenge 8";
+ String levelHash = "8c2dd7e9818e5c6a9f8562feefa002dc0e455f0e92c8a46ab0cf519b1547eced";
  ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " Accessed");
  if (request.getSession() != null)
  {
@@ -41,42 +42,40 @@ String levelName = "SQL Injection Challenge One";
  	if (Validate.validateSession(ses) && tokenCookie != null)
  	{
  		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " has been accessed by " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
+
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Security Shepherd - SQL Injection Challenge One</title>
+	<title>Security Shepherd - <%= levelName %></title>
 	<link href="../css/lessonCss/theCss.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 	<script type="text/javascript" src="../js/jquery.js"></script>
 		<div id="contentDiv">
-			<h2 class="title">SQL Injection Challenge One</h2>
+			<h2 class="title"><%= levelName %></h2>
 			<p> 
-				To complete this challenge, you must exploit the SQL injection flaw in the following form to find the result key.
-				<div id="hint" style="display: none;">
-					<h2 class="title">Challenge Hint</h2>
-					This is the query you are attempting to inject code into... But your input is been validated by the server before being sent to the interpreter!
-					<br />
-					<br />
-					<div>SELECT * FROM customers WHERE customerAddress ='<a id="userContent"></a>';</div>
-					<br />
-					<br />
-				</div>
+				To complete this challenge, you must exploit a SQL injection flaw so you can sign in and receive the result key.
 				
 				<form id="leForm" action="javascript:;">
 					<table>
-					<tr><td>
-						Please enter the <a>Customer Email</a> of the user that you want to look up
+					<tr><td colspan="2">
+						Please enter your email and password to sign in.
 					</td></tr>
 					<tr><td>
-						<input style="width: 400px;" id="userIdentity" type="text"/>
+						Email: 
+					</td><td>
+						<input style="width: 400px;" id="subEmail" type="text" autocomplete="off"/>
 					</td></tr>
 					<tr><td>
-						<div id="submitButton"><input type="submit" value="Get user"/></div>
+						Password: 
+					</td><td>
+						<input style="width: 400px;" id="subPass" type="password" autocomplete="off"/>
+					</td></tr>
+					<tr><td>
+						<div id="submitButton"><input type="submit" value="Sign In"/></div>
 						<p style="display: none;" id="loadingSign">Loading...</p>
-						<div style="display: none;" id="hintButton"><input type="button" value="Would you like a hint?" id="theHintButton"/></div>
 					</td></tr>
 					</table>
 				</form>
@@ -87,17 +86,17 @@ String levelName = "SQL Injection Challenge One";
 		<script>
 			var counter = 0;
 			$("#leForm").submit(function(){
-				counter = counter + 1;
 				$("#submitButton").hide("fast");
 				$("#loadingSign").show("slow");
-				$("#userContent").text($("#userIdentity").val());
-				var theName = $("#userIdentity").val();
+				var theEmail = $("#subEmail").val();
+				var thePass = $("#subPass").val();
 				$("#resultsDiv").hide("slow", function(){
 					var ajaxCall = $.ajax({
 						type: "POST",
-						url: "ffd39cb26727f34cbf9fce3e82b9d703404e99cdef54d2aa745f497abe070b",
+						url: "<%= levelHash %>",
 						data: {
-							userIdentity: theName
+							subEmail: theEmail,
+							subPassword: thePass
 						},
 						async: false
 					});
@@ -112,15 +111,11 @@ String levelName = "SQL Injection Challenge One";
 					$("#resultsDiv").show("slow", function(){
 						$("#loadingSign").hide("fast", function(){
 							$("#submitButton").show("slow");
-							if (counter == 3)
-							{
-								$("#hintButton").show("slow");
-							}
 						});
 					});
 				});
 			});
-			$("#userIdentity").change(function () {
+			$("#aUserId").change(function () {
 				$("#userContent").text($(this).val());
 			}).change();
 			$("#theHintButton").click(function() {
@@ -132,7 +127,7 @@ String levelName = "SQL Injection Challenge One";
 		<% if(Analytics.googleAnalyticsOn) { %><%= Analytics.googleAnalyticsScript %><% } %>
 </body>
 </html>
-<% 
+<%
 	}
 	else
 	{

@@ -17,6 +17,62 @@
  * @author Mark Denihan
  */
 
+$("#updatePlayerScoreLink").click(function(){
+	$("#submitResult").slideUp("fast", function(){
+		$("#contentDiv").hide("fast", function(){
+			$("#contentDiv").load("admin/userManagement/givePoints.jsp", function(response, status, xhr) {
+			  if (status == "error") {
+				var msg = "Sorry but there was an error: ";
+				$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+			  }
+			  $("#contentDiv").show("fast");
+			});
+		});	
+	});
+});
+
+$("#suspendPlayerLink").click(function(){
+	$("#submitResult").slideUp("fast", function(){
+		$("#contentDiv").hide("fast", function(){
+			$("#contentDiv").load("admin/userManagement/suspendUser.jsp", function(response, status, xhr) {
+			  if (status == "error") {
+				var msg = "Sorry but there was an error: ";
+				$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+			  }
+			  $("#contentDiv").show("fast");
+			});
+		});	
+	});
+});
+
+$("#unSuspendPlayerLink").click(function(){
+	$("#submitResult").slideUp("fast", function(){
+		$("#contentDiv").hide("fast", function(){
+			$("#contentDiv").load("admin/userManagement/unSuspendUser.jsp", function(response, status, xhr) {
+			  if (status == "error") {
+				var msg = "Sorry but there was an error: ";
+				$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+			  }
+			  $("#contentDiv").show("fast");
+			});
+		});	
+	});
+});
+
+$("#changePlayerPasswordLink").click(function(){
+	$("#submitResult").slideUp("fast", function(){
+		$("#contentDiv").hide("fast", function(){
+			$("#contentDiv").load("admin/userManagement/changeUserPassword.jsp", function(response, status, xhr) {
+			  if (status == "error") {
+				var msg = "Sorry but there was an error: ";
+				$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+			  }
+			  $("#contentDiv").show("fast");
+			});
+		});	
+	});
+});
+
 $("#createNewAdminLink").click(function(){
 	$("#submitResult").slideUp("fast", function(){
 		$("#contentDiv").hide("fast", function(){
