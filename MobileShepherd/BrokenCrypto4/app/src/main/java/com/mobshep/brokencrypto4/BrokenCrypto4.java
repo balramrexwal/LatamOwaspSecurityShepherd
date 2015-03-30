@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import net.sqlcipher.database.SQLiteDatabase;
@@ -29,7 +30,39 @@ public class BrokenCrypto4 extends ActionBarActivity {
         generateKey();
         generateDB(this);
 
+        String destinationDir = this.getFilesDir().getParentFile().getPath() + "/crypto/";
+
+        String destinationPath = destinationDir + "key.txt";
+
+        File f = new File(destinationPath);
+
+        if (!f.exists()) {
+            File directory = new File(destinationDir);
+            directory.mkdirs();
+
+            try {
+                copyDatabase(getBaseContext().getAssets().open("key.txt"),
+                        new FileOutputStream(destinationPath));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
+
+    public void copyDatabase(InputStream iStream, OutputStream oStream)
+            throws IOException {
+        byte[] buffer = new byte[1024];
+        int i;
+        while ((i = iStream.read(buffer)) > 0) {
+            oStream.write(buffer, 0, i);
+        }
+        iStream.close();
+        oStream.close();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,7 +167,7 @@ public class BrokenCrypto4 extends ActionBarActivity {
             db.execSQL("DROP TABLE IF EXISTS key");
             db.execSQL("CREATE TABLE key(key VARCHAR)");
 
-            db.execSQL("INSERT INTO key VALUES('The Key is $haveThe$kies.')");
+            db.execSQL("INSERT INTO key VALUES('The Key is ShaveTheSkies.')");
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -150,7 +183,7 @@ public class BrokenCrypto4 extends ActionBarActivity {
     {
         String destinationDir = this.getFilesDir().getParentFile().getPath() + "/crypto/encrypt/";
 
-        String destinationPath = destinationDir + "Key";
+        String destinationPath = destinationDir + "key";
 
 
         File f = new File(destinationPath);
@@ -160,7 +193,7 @@ public class BrokenCrypto4 extends ActionBarActivity {
             directory.mkdirs();
 
             try {
-                copyDatabase(getBaseContext().getAssets().open("Key"),
+                copyKey(getBaseContext().getAssets().open("key"),
                         new FileOutputStream(destinationPath));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -170,7 +203,7 @@ public class BrokenCrypto4 extends ActionBarActivity {
         }
     }
 
-    public void copyDatabase(InputStream iStream, OutputStream oStream)
+    public void copyKey(InputStream iStream, OutputStream oStream)
             throws IOException {
         byte[] buffer = new byte[1024];
         int i;
