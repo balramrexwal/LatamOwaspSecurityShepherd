@@ -62,7 +62,7 @@ if (request.getSession() != null)
 				
 				<%= levelBlurb %>
 				<br/>
-				This App uses AES to encrypt it's chat however it's developers have implemented this poorly. The key is in the conversation. Decrypt the chat to get the key.  			
+				This App uses DES to encrypt it's chat however it's developers have implemented this poorly. The key is in the conversation. Decrypt the chat to get the key.  			
 				<br/>
 				<br/>
 				<%= Analytics.getMobileLevelBlurb("BrokenCrypto3.apk") %>

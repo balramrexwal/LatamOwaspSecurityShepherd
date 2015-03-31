@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="The Key is: MegaKillerExtremeCheese"
-            android:background="@xml/edittext"
+            android:background="@drawable/edittext"
             android:ems="10"
             android:layout_marginTop="20dp"
             android:gravity="center"
