@@ -38,7 +38,9 @@ if (request.getSession() != null) //Session If
 	}
 	// validateAdminSession ensures a valid session, and valid administrator credentials
 	// Also, if tokenCookie != null, then the page is good to continue loading
-	if (Validate.validateAdminSession(ses) && tokenCookie != null) //Valid Session if
+	// Token is now validated when accessing admin pages to stop attackers causing other users to tigger logs of access attempts
+	Object tokenParmeter = request.getParameter("csrfToken");
+	if(Validate.validateAdminSession(ses, tokenCookie, tokenParmeter))
 	{
 		//Logging Username
 		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), "Accessed by: " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
