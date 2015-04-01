@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.Encoder;
 
-import servlets.OneTimePad;
 import utils.Hash;
 import utils.ModulePlan;
 import utils.ShepherdLogManager;

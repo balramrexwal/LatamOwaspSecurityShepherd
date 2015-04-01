@@ -236,7 +236,63 @@ public class Validate
 						String role = (String) ses.getAttribute("userRole");
 						result = (role.compareTo("admin") == 0);
 						if(!result)
-							log.fatal("User" + userName + " Attempting Admin functions!");
+							log.fatal("User " + userName + " Attempting Admin functions! (CSRF Tokens Not Checked)");
+					} 
+					catch (Exception e) 
+					{
+						log.fatal("Tampered Parameter Detected!!! Could not parameters");
+					}
+				}
+				else
+				{
+					log.debug("Session has no credentials");
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Session is checked for credentials and ensures that they have not been modified and that they are valid for an administrator. This function also validates CSRF tokens
+	 * @param ses HttpSession from users browser
+	 * @return Boolean value that reflects the validity of the admins session
+	 */
+	public static boolean validateAdminSession(HttpSession ses, Cookie cookieToken, Object requestToken)
+	{
+		boolean result = false;
+		String userName = new String();
+		if (ses == null)
+		{
+			log.debug("No Session Found");
+		}
+		else
+		{
+			if (ses.getAttribute("logout") != null) 
+			{
+				log.debug("Logout Attribute Found: Invalidating session...");
+			    ses.invalidate(); // make servlet engine forget the session
+			}
+			else
+			{
+				//log.debug("Active Session Found");
+				if (ses.getAttribute("userRole") != null && ses.getAttribute("userName") != null)
+				{
+					try 
+					{
+						userName = (String) ses.getAttribute("userName");
+						//log.debug("Session holder is " + userName);
+						String role = (String) ses.getAttribute("userRole");
+						result = (role.compareTo("admin") == 0);
+						if(!result)
+						{
+							//Check CSRF Tokens of User to ensure they are not being CSRF'd into causing Unauthorised Access Alert
+							boolean validCsrfTokens = validateTokens(cookieToken, requestToken);
+							if(validCsrfTokens)
+								log.fatal("User account " + userName + " Attempting Admin functions! (With Valid CSRF Tokens)");
+							else
+								log.error("User account " + userName + " accessing admin function with bad CSRF Tokens");
+						}
+							
 					} 
 					catch (Exception e) 
 					{
