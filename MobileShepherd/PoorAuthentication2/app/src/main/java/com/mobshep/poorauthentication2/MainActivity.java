@@ -37,7 +37,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 
-    private static final String[] authCodes = {"784921", "425925", "257943", "722347", "524215", "924315", "624665"};
+    private static final String[] authCodes = {"784921", "425925", "257943", "524215", "624665"};
 
 
     Button login;
@@ -112,50 +112,38 @@ public class MainActivity extends Activity {
         boolean contains2 = false;
         boolean contains4 = false;
         boolean isSixNumbers = false;
-        boolean previouslyUsed = false;
 
         //requires fixing
         // if (codeString.contentEquals("784921") || codeString.contentEquals("425925") || codeString.contentEquals("257943") || codeString.contentEquals("722347") || codeString.contentEquals("524215") || codeString.contentEquals("924315") || codeString.contentEquals("624665")) {
 
-        int i;
-        for (i = 0; i < authCodes.length; i++) {
-            if (codeString.equals(i)) {
-                return false;
-            } else {
-                notUsedBefore = true;
-            }
-        }
 
-            int mod = codeEntered % 2;
-            {
+        int mod = codeEntered % 2;
+        {
 
-                if (mod != 0) {
+            if (mod != 0) {
 
-                    isNumberOdd = true;
-                    Log.i("LOG", "Number is odd...");
+                isNumberOdd = true;
+                Log.i("LOG", "Number is odd...");
 
-                    if (String.valueOf(codeString).contains("2")) {
+                if (String.valueOf(codeString).contains("2")) {
 
-                        contains2 = true;
-                        Log.i("LOG", "Number contains 2...");
+                    contains2 = true;
+                    Log.i("LOG", "Number contains 2...");
 
 
-                        if (String.valueOf(codeString).contains("4")) {
+                    if (String.valueOf(codeString).contains("4")) {
 
-                            contains4 = true;
-                            Log.i("LOG", "Number contains 4...");
-
-
-                            if ((authCode.length() == 6)) {
-                                isSixNumbers = true;
-                                Log.i("LOG", "Number contains six digits...");
+                        contains4 = true;
+                        Log.i("LOG", "Number contains 4...");
 
 
-                                if (isNumberOdd == true && contains2 == true && contains4 == true && isSixNumbers == true && notUsedBefore == true) {
+                        if ((authCode.length() == 6)) {
+                            isSixNumbers = true;
+                            Log.i("LOG", "Number contains six digits...");
 
-                                    return true;
-                                }
 
+                            if (isNumberOdd == true && contains2 == true && contains4 == true && isSixNumbers == true) {
+                                return true;
                             } else {
                                 return false;
                             }
@@ -163,7 +151,6 @@ public class MainActivity extends Activity {
                         } else {
                             return false;
                         }
-
 
                     } else {
                         return false;
@@ -175,9 +162,8 @@ public class MainActivity extends Activity {
 
             }
             return true;
-
         }
-
+    }
 
     public void referenceXML() {
 

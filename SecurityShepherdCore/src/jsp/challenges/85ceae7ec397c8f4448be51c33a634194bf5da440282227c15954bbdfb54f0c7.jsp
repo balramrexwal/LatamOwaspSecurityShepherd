@@ -20,7 +20,7 @@
  * @author Sean Duggan
  */
 //No Quotes In level Name
-String levelName = "Unintended Data Leakage 2";
+String levelName = "Mobile Unintended Data Leakage 2";
 //Alphanumeric Only
 String levelHash = "85ceae7ec397c8f4448be51c33a634194bf5da440282227c15954bbdfb54f0c7";
 //Level blurb can be written here in HTML OR go into the HTML body and write it there. Nobody will update this but you
@@ -62,9 +62,9 @@ if (request.getSession() != null)
 				
 				<%= levelBlurb %>
 				<br/>
-This App is leaking logs. The Key is the winning lotto number! 			<br/>
+This App is leaking logs. The Key is the winning lotto number! <br/>
 				<br/>
-				<%= Analytics.getMobileLevelBlurb("BrokenCrypto3.apk") %>
+				<%= Analytics.getMobileLevelBlurb("UDataLeakage3.apk") %>
 				
 			</p>
 		</div>

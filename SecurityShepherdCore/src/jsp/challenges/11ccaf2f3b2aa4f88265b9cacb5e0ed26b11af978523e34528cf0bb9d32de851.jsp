@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=iso-8859-1" language="java" import="utils.*" errorPage=""%>
+<%@ page contentType="text/html; charset=iso-8859-1" language="java" import="utils.*" errorPage="" %>
 <%
 /**
  * <br/><br/>
@@ -19,11 +19,10 @@
  *
  * @author Sean Duggan
  */
-
 //No Quotes In level Name
-String levelName = "What is Poor Authentication?";
+String levelName = "Mobile Insecure Data Storage 3";
 //Alphanumeric Only
-String levelHash = "77777b312d5b56a17c1f30550dd34e8d6bd8b037f05341e64e94f5411c10ac8e";
+String levelHash = "11ccaf2f3b2aa4f88265b9cacb5e0ed26b11af978523e34528cf0bb9d32de851";
 //Level blurb can be written here in HTML OR go into the HTML body and write it there. Nobody will update this but you
 String levelBlurb = "";
 
@@ -46,67 +45,36 @@ if (request.getSession() != null)
 	if (Validate.validateSession(ses) && tokenCookie != null)
 	{
 		ShepherdLogManager.logEvent(request.getRemoteAddr(), request.getHeader("X-Forwarded-For"), levelName + " has been accessed by " + ses.getAttribute("userName").toString(), ses.getAttribute("userName"));
-
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Security Shepherd - <%=levelName%></title>
-<link href="../css/lessonCss/theCss.css" rel="stylesheet" type="text/css"
-	media="screen" />
-
-</script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Security Shepherd - <%= levelName %></title>
+	<link href="../css/lessonCss/theCss.css" rel="stylesheet" type="text/css" media="screen" />
+	
+	</script> 
 </head>
 <body>
 	<script type="text/javascript" src="../js/jquery.js"></script>
-	<div id="contentDiv">
-		<p>
-			<%
-				/* Put Your Blurb Here Instead of the following scriptlet. Not this comment Bren. Jeesh*/
-			%>
-			
-			<h2 class="title"> <%= levelName %></h2>
+		<div id="contentDiv">
+			<h2 class="title"><%= levelName %></h2>
 			<p> 
-				<div id="lessonIntro">
-Poor Authentication is an isse which occurs when an App relies on an authentication method which is insecure. This can come in many different forms. One such example is password reset functions, which although convenient, can compromise the authentication process. In this app, we don't need to know the password as a rest function is available to us. Secondly, the App is leaking logs of what the user has typed during previous uses of the App. This information will provide you with the data you need to reset the password and get the key. 
-Authentication is validating that a user is who they say they are. Authorization is validating that a user has access to a given resource. (such as an Admin priveledge.) 
-
-			<%=levelBlurb%>
-			<br />  </br> 
-			 </br> 
-			 
-
-			<input type="button" value="Hide Lesson Introduction" id="hideLesson"/>
-				</div>
-				<input type="button" value="Show Lesson Introduction" id="showLesson"  style="display: none;"/>
 				<br/>
-			
-			
-		
-			<br>
-			<br/>
-			<%= Analytics.getMobileLevelBlurb("PoorAuthentication.apk") %>
-			
-			<script>
 				
-				$('#hideLesson').click(function(){
-				$("#lessonIntro").hide("slow", function(){
-					$("#showLesson").show("fast");
-				});
-			});
-			
-			$("#showLesson").click(function(){
-				$('#showLesson').hide("fast", function(){
-					$("#lessonIntro").show("slow");
-				});
-			});
-		</script>
+				Not all Apps will use <a>sqlite</a> to store user data, in some cases <a>SharedPreferences</a> is used. The key to this level can be gained once you log in as a legitimate user. 
+				
+				<br/>
+				<br/>
+				
+				<%= Analytics.getMobileLevelBlurb("InsecureData4.apk") %>
+				
+			</p>
+		</div>
+		
 		<% if(Analytics.googleAnalyticsOn) { %><%= Analytics.googleAnalyticsScript %><% } %>
-		</p>
-	</div>
 </body>
 </html>
-<%
+<% 
 	}
 	else
 	{

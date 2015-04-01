@@ -62,7 +62,7 @@ if (request.getSession() != null)
 				
 				<%= levelBlurb %>
 				<br/>
-				This App uses a deprecated encryption algorithm (DES) and breaks a few rules of key management. The key is in the conversation. Decrypt the chat to get the key.  			
+				This App uses a deprecated encryption algorithm (DES) and breaks a vital rule of key management. The key is in the conversation. Decrypt the chat to get the key.  			
 				<br/>
 				<br/>
 				<%= Analytics.getMobileLevelBlurb("BrokenCrypto2.apk") %>

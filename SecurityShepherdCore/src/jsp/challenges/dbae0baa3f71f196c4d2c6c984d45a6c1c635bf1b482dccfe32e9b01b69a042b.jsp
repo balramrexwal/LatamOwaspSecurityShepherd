@@ -61,7 +61,7 @@ if (request.getSession() != null)
 		<p>
 
 			<%=levelBlurb%>
-			<br /> The developers of this App have decided to use an algorithm to confirm or deny the authenticity of the key. You must Reverse Engineer ReverseEngineer3.APK to find this algorithm. If you are unsure whether or not the key is correct, there is a key validity checker in the App. <br />
+			<br /> The developers of this App, <a>ReverseEngineer4</a>, have decided to use an algorithm to confirm or deny the authenticity of the key. You must Reverse Engineer ReverseEngineer3.APK to find this algorithm. If you are unsure whether or not the key is correct, there is a key validity checker in the App. <br />
 			<br>
 			<br/>
 			<%= Analytics.getMobileLevelBlurb("ReverseEngineer4.apk") %>

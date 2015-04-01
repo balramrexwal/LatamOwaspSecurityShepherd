@@ -20,7 +20,7 @@
  * @author Sean Duggan
  */
 //No Quotes In level Name
-String levelName = "Poor Authentication 1";
+String levelName = "Mobile Poor Authentication 1";
 //Alphanumeric Only
 String levelHash = "efa08298fc6a4add4b9a4bbdbbbb18ac934667971fa275bd7d234589bd8a8467";
 //Level blurb can be written here in HTML OR go into the HTML body and write it there. Nobody will update this but you
@@ -60,7 +60,7 @@ if (request.getSession() != null)
 			<h2 class="title"><%= levelName %></h2>
 			<p> 
 				<br/>
-				
+				You must log into the App  <a>PoorAuthentication2.apk</a> to get the key. The Username and Password have been saved but this App uses a specially generated <a>Authentication Code</a>. 
 				<br/>
 				<br/>
 				
