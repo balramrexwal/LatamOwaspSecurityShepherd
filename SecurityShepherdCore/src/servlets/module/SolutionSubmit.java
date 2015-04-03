@@ -158,7 +158,7 @@ public class SolutionSubmit extends HttpServlet
 							}
 							else
 							{
-								log.debug("Could not update user result");
+								log.error("User has completed this module before. Returning Error");
 								out.write("<h2 class=\"title\">Haven't You Done This Already?</h2><br>" +
 										"<p>" +
 										"Our records say you have already completed this module! Go try another one!" +

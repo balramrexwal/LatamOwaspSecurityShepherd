@@ -168,7 +168,7 @@ public class Getter
 		}
 		catch(SQLException e)
 		{
-			log.error("userCheckResult Failure: " + e.toString());
+			log.debug("userCheckResult Failure: " + e.toString());
 			result = null;
 		}
 		Database.closeConnection(conn);
