@@ -124,7 +124,9 @@ if(ses.getAttribute("errorMessage") != null)
 					- If you find a cheat or trick to solve things more easily, please report it for Bonus Points.<br>
 					- The organizers might change the rules throughout the challenge.<br>
 					- Participants breaking these rules might be penalized or excluded from the competition.<br>
+					- The CTF will run from April 8th until April 21st 19:30 GMT+1<br>
 					<br/>
+					All traffic sent to the CTF is logged and analysed. You will be caught if you break these rules.<br/>
 					<center><big style="color:#A878EF;">SHEPHERD DISCLAIMER</big></center>
 					<br/>
 					<br/>

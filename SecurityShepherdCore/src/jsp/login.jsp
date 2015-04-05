@@ -136,7 +136,8 @@ if(ses.getAttribute("loginFailed") != null)
 			<a href="http://bit.ly/BccRiskAdvisorySite"><img src="css/images/bccRiskAdvisorySmallLogo.jpg" alt="BCC Risk Advisory"/></a>
 			<a href="http://bit.ly/EdgeScan"><img src="css/images/edgescanSmallLogo.jpg" alt="EdgeScan" /></a>
 			<br/><br/>
-			The OWASP Security Shepherd Project would also like to thank Dr. Anthony Keane and the ITB Research Lab for hosting http://owasp.securityShepherd.eu!  
+			The OWASP Security Shepherd Project would also like to thank Dr. Anthony Keane and the ITB Research Lab for hosting http://owasp.securityShepherd.eu!<br>
+			<a href="http://securityresearch.ie/"><img src="https://www.owasp.org/images/thumb/2/24/Fontlogo.png/300px-Fontlogo.png"/></a>  
 		</p>
 		</div>
 	</div>

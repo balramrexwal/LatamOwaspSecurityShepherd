@@ -91,7 +91,7 @@
 			<a href="http://bit.ly/EdgeScan"><img src="css/images/edgescanSmallLogo.jpg" alt="EdgeScan" /></a>
 			<br/><br/>
 			The OWASP Security Shepherd Project would also like to thank Dr. Anthony Keane and the ITB Security Research Lab for hosting the public http://owasp.securityShepherd.eu!  
-			</p>
+			<br/><a href="http://securityresearch.ie/"><img src="https://www.owasp.org/images/thumb/2/24/Fontlogo.png/300px-Fontlogo.png"/></a></p>
 			<% if(Analytics.googleAnalyticsOn) { %><%= Analytics.googleAnalyticsScript %><% } %>
 		</div>
 </body>
