@@ -94,7 +94,7 @@
 							for(i=0;i<o.length;i++) {
 								if ($('#userbar-'+ o[i].id).length == 0) {
 									// this id doesn't exist, so add it to our list.
-									var newUser = '<li class="scoreLine"><div id="userbar-'+ o[i].id + '" class="scoreBar" title="' + o[i].usernameTitle + ' with ' + o[i].score + ' points" style="width: ' + o[i].scale + '\u0025;">' +
+									var newUser = '<li class="scoreLine"><div id="userbar-'+ o[i].id + '" class="scoreBar" title="' + o[i].usernameTitle + '" style="width: ' + o[i].scale + '\u0025;">' +
 											'<div id="userplace-'+ o[i].id + '" class="place"><h3 style="display:none;" id="user-' + o[i].id + '">' + o[i].order + '</h3>' + getGetOrdinal(o[i].place) + ': </div>' 
 											+ '<div class="scoreName" >'+ o[i].username
 												+ '<div id="goldMedals-' + o[i].id + '" class="medalContainer"><div style="' + o[i].goldDisplay + '"><div class="goldMedalAmountBubble">' + o[i].goldMedalCount + '</div></div></div>'
@@ -105,7 +105,7 @@
 								} else {
 									// this id does exist
 									//update user elements in the list item.
-									$('#userbar-'+ o[i].id).prop('title', o[i].usernameTitle + ' with ' + o[i].score + ' points');
+									$('#userbar-'+ o[i].id).prop('title', o[i].userTitle);
 									$('#userscore-'+o[i].id).html(o[i].score);
 									$('#userplace-'+o[i].id).html('<h3 style="display:none;" id="user-' + o[i].id + '">' + o[i].order + '</h3>' + getGetOrdinal(o[i].place) + ': ');
 									$('#goldMedals-' + o[i].id).html('<div style="' + o[i].goldDisplay + '"><div class="goldMedalAmountBubble">' + o[i].goldMedalCount + '</div></div></div>');

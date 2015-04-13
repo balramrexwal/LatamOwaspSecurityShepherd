@@ -850,9 +850,45 @@ public class Getter
 						bronzeDisplayStyle = displayMedal;
 					
 					int barScale = (int)((score*100)/baseBarScale); //bar scale is the percentage the bar should be of the row's context (Highest Possible is depends on scale set in maxBarScale. eg: maxBarScale = 1.1 would mean the max scale would be 91% for a single row)
+					
+					String userMedalString = new String();
+					if(goldMedals > 0 || silverMedals > 0 || bronzeMedals > 0)
+					{
+						userMedalString += " holding ";
+						if (goldMedals > 0)
+							userMedalString += goldMedals + " gold";
+						if (silverMedals > 0)
+						{
+							if (goldMedals > 0) //Medals Before, puncuate
+							{
+								if(bronzeMedals > 0) //more medals after silver? Comma
+								{
+									userMedalString += ", ";
+								}
+								else //Say And
+								{
+									userMedalString += " and ";
+								}
+							}
+							userMedalString += silverMedals + " silver";
+						}
+						if (bronzeMedals > 0)
+						{
+							if (goldMedals > 0 || silverMedals > 0) //Medals Before?
+							{
+								userMedalString += " and ";
+							}
+							userMedalString += bronzeMedals + " bronze";
+						}
+						//Say Medal(s) at the end of the string
+						userMedalString += " medal";
+						if(goldMedals + silverMedals + bronzeMedals > 0)
+							userMedalString += "s";
+					}
+						
 					jsonInner.put("id", new String(encoder.encodeForHTML(resultSet.getString(1)))); //User Id
 					jsonInner.put("username", new String(encoder.encodeForHTML(resultSet.getString(2)))); //User Name
-					jsonInner.put("usernameTitle", new String(encoder.encodeForHTMLAttribute(resultSet.getString(2)))); //User name encoded for title attribute
+					jsonInner.put("userTitle", new String(encoder.encodeForJavaScript(resultSet.getString(2)) + " with " + score + " points" + userMedalString)); //User name encoded for title attribute
 					jsonInner.put("score", new Integer(score)); //Score
 					jsonInner.put("scale", barScale); //Scale of score bar
 					jsonInner.put("place", place); //Place on board
