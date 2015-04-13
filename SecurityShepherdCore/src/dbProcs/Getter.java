@@ -882,13 +882,13 @@ public class Getter
 						}
 						//Say Medal(s) at the end of the string
 						userMedalString += " medal";
-						if(goldMedals + silverMedals + bronzeMedals > 0)
+						if(goldMedals + silverMedals + bronzeMedals > 1)
 							userMedalString += "s";
 					}
 						
 					jsonInner.put("id", new String(encoder.encodeForHTML(resultSet.getString(1)))); //User Id
 					jsonInner.put("username", new String(encoder.encodeForHTML(resultSet.getString(2)))); //User Name
-					jsonInner.put("userTitle", new String(encoder.encodeForJavaScript(resultSet.getString(2)) + " with " + score + " points" + userMedalString)); //User name encoded for title attribute
+					jsonInner.put("userTitle", new String(encoder.encodeForHTML(resultSet.getString(2)) + " with " + score + " points" + userMedalString)); //User name encoded for title attribute
 					jsonInner.put("score", new Integer(score)); //Score
 					jsonInner.put("scale", barScale); //Scale of score bar
 					jsonInner.put("place", place); //Place on board
