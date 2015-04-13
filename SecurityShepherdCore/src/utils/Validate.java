@@ -71,7 +71,7 @@ public class Validate
 		}
 		if(theToken != null)
 		{
-			log.debug("Found Cookie " + theToken.getName() + " with value " + theToken.getValue());
+			//log.debug("Found Cookie " + theToken.getName() + " with value " + theToken.getValue());
 			//The Token is currently designed to be a random Big Integer. If the Big Integer Case does not work, the token has been modified. Potentially in a malicious manner
 			try
 			{

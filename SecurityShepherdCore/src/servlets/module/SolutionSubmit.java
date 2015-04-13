@@ -104,8 +104,18 @@ public class SolutionSubmit extends HttpServlet
 							validKey = storedResult.compareTo(solutionKey) == 0;
 						else
 						{
-							//Encrypted Solution key,  must be decrypted before compare
-							String decryptedKey = Hash.decryptUserSpecificSolution(Validate.validateEncryptionKey(userName), solutionKey);
+							String decryptedKey = new String();
+							try
+							{
+								//Encrypted Solution key,  must be decrypted before compare
+								decryptedKey = Hash.decryptUserSpecificSolution(Validate.validateEncryptionKey(userName), solutionKey);
+							}
+							catch(Exception e)
+							{
+								log.error("Could not decrypt result key: " + e.toString());
+								// Key likely could not be decrypted because somebody submitted a string that could not be decrypted. 
+								//This is a bad submission so they should be warned. String will continue from this point as an empty value and will cause the function to run the Bad Submission procedure
+							}
 							storedResult += Hash.getCurrentSalt(); //Add server solution salt to base key before compare with decrypted key
 							validKey = storedResult.compareTo(decryptedKey) == 0;
 							log.debug("Decrypted Submitted Key: " + decryptedKey);
