@@ -799,6 +799,9 @@ public class Getter
 			int resultAmount = 0;
 			int prevPlace = 0;
 			int prevScore = 0;
+			int prevGold = 0;
+			int prevSilver = 0;
+			int prevBronze = 0;
 			float baseBarScale = 0; //
 			float tieBreaker = 0;
 			while(resultSet.next()) //For each user in a class
@@ -809,6 +812,9 @@ public class Getter
 				{
 					int place = resultAmount;
 					int score = resultSet.getInt(3);
+					int goldMedals = resultSet.getInt(4);
+					int silverMedals = resultSet.getInt(5);
+					int bronzeMedals = resultSet.getInt(6);
 					if(resultAmount == 1) //First Place is Returned First, so this will be the biggest bar on the scoreboard
 					{
 						int highscore = score;
@@ -822,8 +828,8 @@ public class Getter
 					}
 					else
 					{
-						//Does this score line match the one before? if so the place shouldnt change
-						if (score == prevScore)
+						//Does this score line match the one before (Score and Medals)? if so the place shouldnt change
+						if (score == prevScore && goldMedals == prevGold && silverMedals == prevSilver && bronzeMedals == prevBronze)
 						{
 							place = prevPlace;
 							tieBreaker = tieBreaker + 0.01f;
@@ -832,12 +838,12 @@ public class Getter
 						{
 							prevScore = score;
 							prevPlace = place;
+							prevGold = goldMedals;
+							prevSilver = silverMedals;
+							prevBronze = bronzeMedals;
 							tieBreaker = 0;
 						}
 					}
-					int goldMedals = resultSet.getInt(4);
-					int silverMedals = resultSet.getInt(5);
-					int bronzeMedals = resultSet.getInt(6);
 					String displayMedal = new String("display: inline;");
 					String goldDisplayStyle = new String("display: none;");
 					String silverDisplayStyle = new String("display: none;");
