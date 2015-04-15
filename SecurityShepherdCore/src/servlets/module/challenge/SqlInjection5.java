@@ -167,7 +167,7 @@ public class SqlInjection5 extends HttpServlet
 	
 	private static int validateAmount (int amount)
 	{
-		if(amount < 0)
+		if(amount < 0 || amount > 9000)
 			amount = 0;
 		return amount;
 	}

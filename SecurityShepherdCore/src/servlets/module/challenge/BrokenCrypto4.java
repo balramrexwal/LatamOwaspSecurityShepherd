@@ -62,7 +62,6 @@ public class BrokenCrypto4 extends HttpServlet
 			PrintWriter out = response.getWriter();  
 			out.print(getServletInfo());
 			String htmlOutput = new String();
-			boolean invalidCouponSubmiited = false;
 			String applicationRoot = getServletContext().getRealPath("");
 			Encoder encoder = ESAPI.encoder();
 			try
@@ -123,13 +122,11 @@ public class BrokenCrypto4 extends HttpServlet
 					else
 					{
 						log.debug("Invalid Coupon Code");
-						invalidCouponSubmiited = true;
 					}
 				}
 				catch(Exception e)
 				{
 					log.debug("Could Not Find Coupon: " + e.toString());
-					invalidCouponSubmiited = true;
 				}
 				conn.close();
 				
@@ -172,7 +169,7 @@ public class BrokenCrypto4 extends HttpServlet
 	
 	private static int validateAmount (int amount)
 	{
-		if(amount < 0)
+		if(amount < 0 || amount > 9000)
 			amount = 0;
 		return amount;
 	}
