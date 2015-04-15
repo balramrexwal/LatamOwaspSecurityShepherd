@@ -69,21 +69,21 @@ public class GetJsonScore extends HttpServlet
 				String applicationRoot = getServletContext().getRealPath("");
 				String jsonOutput = Getter.getJsonScore(applicationRoot, ScoreboardStatus.getScoreboardClass());
 				if(jsonOutput.isEmpty())
-					jsonOutput = "No Scoreboard Data Right Now";
+					jsonOutput = "ERROR: No Scoreboard Data Right Now";
 				out.write(jsonOutput);
 			}
 			else
 			{
 				if(!canSeeScoreboard)
-					out.write("Scoreboard is not currently available");
+					out.write("ERROR: Scoreboard is not currently available");
 				else
-					out.write("Error Occurred!");
+					out.write("ERROR: Please refresh page!");
 			}
 		}
 		else
 		{
 			log.debug("Unauthenticated Scoreboard Request");
-			out.write("<img src='css/images/loggedOutSheep.jpg'/>");
+			out.write("ERROR: You are logged out. Please refresh the page");
 		}
 		//log.debug("*** END servlets.GetJsonScore ***");
 	}

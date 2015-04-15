@@ -83,24 +83,70 @@
 			<script>
 				var windowIsActive = true;
 	
-				window.onfocus = function () { 
+				window.onfocus = function windowFocus () { 
 					windowIsActive = true; 
 				}; 
 	
-				window.onblur = function () { 
+				window.onblur = function windowBlur () { 
 					windowIsActive = false; 
 				}; 
+				
+				function timeSince(date) {
+
+				    var seconds = Math.floor((new Date() - date) / 1000);
+
+				    var interval = Math.floor(seconds / 31536000);
+
+				    if (interval > 1) {
+				        return interval + " years";
+				    }
+				    interval = Math.floor(seconds / 2592000);
+				    if (interval > 1) {
+				        return interval + " months";
+				    }
+				    interval = Math.floor(seconds / 86400);
+				    if (interval > 1) {
+				        return interval + " days";
+				    }
+				    interval = Math.floor(seconds / 3600);
+				    if (interval > 1) {
+				        return interval + " hours";
+				    }
+				    interval = Math.floor(seconds / 60);
+				    if (interval > 1) {
+				        return interval + " minutes";
+				    }
+				    
+				    if (Math.floor(seconds) >= 60) {
+				    	return "1 minute"
+				    }
+				    else {
+				    	return "< 1 minute";
+				    }
+				}
+				
+				var lastUpdated = new Date();
+				
 				//Scoreboard based on http://mightystuff.net/dynamic-leaderboard
 				function poll() {
-					if(windowIsActive) { //If Window/Tab is currently in focus, do the magic
-						$.ajax({
+					if(!windowIsActive) { //If Window/Tab is currently not in focus, wait to do the magic
+						console.log ( 'Window not active. Waiting' );
+						$("#badData").html('<center>Scoreboard last updated ' + timeSince(lastUpdated) + ' ago</center>');
+						$("#badData").show("slow");
+						t=setTimeout("poll()", 500); // try again really soon
+					}
+					else { // Window is Active. Do Magic
+						console.log ( 'Window Active. Refreshing' );
+						var ajaxCall = $.ajax({
 							type: "POST",
 							url: 'scoreboard', // needs to return a JSON array of items having the following properties: id, score, username
 							dataType: 'json',
 							data: {
 								csrfToken: "<%= csrfToken %>"
 							},
+							async: false,
 							success: function(o) {
+								$("#badData").hide("fast");
 								for(i=0;i<o.length;i++) {
 									if ($('#userbar-'+ o[i].id).length == 0) {
 										// this id doesn't exist, so add it to our list.
@@ -127,11 +173,22 @@
 									}
 								}
 								sort();
-							},
+							}
 						});	
+						var fullResponse = new String(ajaxCall.responseText);
+						if (fullResponse.startsWith("ERROR:")) {
+							console.log ('Response contained error: ' + fullResponse);
+							$("#badData").html('<center>' + fullResponse + '</center>');
+							$("#badData").show("slow");
+							//Scoreboard will not refresh after this
+							console.log("Scoreboard will not refresh following this error");
+						} else {
+							$("#badData").hide("fast");
+							lastUpdated = new Date().getTime();
+							// play it again, sam (7 secs)
+							t=setTimeout("poll()",7000);
+						}
 					}
-					// play it again, sam (7 secs)
-					t=setTimeout("poll()",7000);
 				}
 				
 				//Algorithm from http://tinysort.sjeiti.com/
