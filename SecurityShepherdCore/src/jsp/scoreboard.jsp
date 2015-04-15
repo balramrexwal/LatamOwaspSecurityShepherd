@@ -169,7 +169,7 @@
 										$('#bronzeMedals-' + o[i].id).html('<div style="' + o[i].bronzeDisplay + '"><div class="bronzeMedalAmountBubble">' + o[i].bronzeMedalCount + '</div></div></div>');
 										$('#userbar-'+ o[i].id).animate({
 									        width: o[i].scale+"%"
-									    }, 300 );
+									    }, 1300 );
 									}
 								}
 								sort();
