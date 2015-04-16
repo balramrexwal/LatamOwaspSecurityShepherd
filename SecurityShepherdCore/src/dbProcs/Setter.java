@@ -557,11 +557,11 @@ public class Setter
 	 * @param userId User Identifier
 	 * @param csrfToken CSRF Token to add to the csrfChallengeSix DB Schema
 	 * @param ApplicationRoot Running context of the application
-	 * @return Returns current CSRF token for user for CSRF Ch7 
+	 * @return Returns current CSRF token for user for CSRF Ch4 
 	 */
 	public static String setCsrfChallengeFourCsrfToken (String userId, String csrfToken, String ApplicationRoot)
 	{
-		log.debug("*** setCsrfChallengeSevenToken ***");
+		log.debug("*** setCsrfChallengeFourToken ***");
 		Connection conn = Database.getChallengeConnection(ApplicationRoot, "csrfChallengeFour");
 		try
 		{
@@ -647,7 +647,7 @@ public class Setter
 		}
 		catch(SQLException e)
 		{
-			log.error("csrfChallengeEnumTokens TokenUpdate Failure: " + e.toString());
+			log.error("csrfChallenge7EnumTokens TokenUpdate Failure: " + e.toString());
 		}
 		Database.closeConnection(conn);		
 		return result;
