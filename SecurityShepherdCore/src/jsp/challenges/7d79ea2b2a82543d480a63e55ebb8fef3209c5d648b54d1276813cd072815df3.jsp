@@ -80,7 +80,7 @@ if (request.getSession() != null)
 				With the following parameters; <a>userId = exampleId</a> and <a>csrf = yourCsrfToken</a>
 				<br/>
 				<br/>
-				Where exampleId is the ID of the user who's CSRF counter is been incremented. 
+				Where exampleId is the ID of the user who's CSRF counter is been incremented. . Any user than you may increment your counter for this challenge, except you. Exploit the CSRF vulnerability in the request described above against other users to complete this challenge. Once you have successfully CSRF'd another Security Shepherd user, the solution key will appear just below this message.
 				Your ID is <%= userId %> and you can retrieve your CSRF token <a href="<%= getYourTokenUrl %>">here</a>
 				<br/>
 				<br/>

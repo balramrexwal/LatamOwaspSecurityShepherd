@@ -66,13 +66,13 @@ String levelName = new String("CSRF Challenge 1");
 		<div id="contentDiv">
 			<h2 class="title">Cross Site Request Forgery Challenge One</h2>
 			<p> 
-				To complete this challenge, you must get your CSRF counter above 0. The request to increment your counter is as follows
+				To complete this challenge, you must get your CSRF counter above 0. Once The request to increment your counter is as follows
 				<br/>
 				<br/>
 				<a> GET /user/csrfchallengeone/plusplus?userid=exampleId </a>
 				<br/>
 				<br/>
-				Where exampleId is the ID of the user who's CSRF counter is been incremented. Your ID is <a><%= userId %></a>
+				Where exampleId is the ID of the user who's CSRF counter is been incremented. Your ID is <a><%= userId %></a>. Any user than you may increment your counter for this challenge, except you. Exploit the CSRF vulnerability in the request described above against other users to complete this challenge. Once you have successfully CSRF'd another Security Shepherd user, the solution key will appear just below this message.
 				<br/>
 				<br/>
 				You can use the CSRF forum below to post a message with HTML.

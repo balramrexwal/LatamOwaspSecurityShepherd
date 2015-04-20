@@ -75,7 +75,7 @@
 				With the following parameters; <a>userid=exampleId & csrftoken=exampleToken</a>
 				<br/>
 				<br/>
-				The csrfToken parameter is generated dynamically for easy user upon user interaction and the exampleId parameter is the identifier of the user who's CSRF counter is been incremented. Your identifier is <a><%= userId %></a>
+				The csrfToken parameter is generated dynamically for easy user upon user interaction and the exampleId parameter is the identifier of the user who's CSRF counter is been incremented. Your identifier is <a><%= userId %></a>. . Any user than you may increment your counter for this challenge, except you. Exploit the CSRF vulnerability in the request described above against other users to complete this challenge. Once you have successfully CSRF'd another Security Shepherd user, the solution key will appear just below this message.
 				<br/>
 				<br/>
 				You can use the CSRF forum below to post an iFrame pointing at a web site.
